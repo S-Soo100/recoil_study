@@ -51,12 +51,8 @@ export default function EnglishQuiz() {
   const choiceAnswer = (index: number) => {
     if (!isSelected) {
       setIsSelected(true);
-      console.log("index");
-      console.log(index);
 
-      //! 제대로 작동하지 않음
-      setSelectedAnswer(index); //! 제대로 작동하지 않음
-      //! 제대로 작동하지 않음
+      setSelectedAnswer(index);
 
       if (index + 1! === question?.answer) {
         setIsCorrect(true);
@@ -110,24 +106,8 @@ export default function EnglishQuiz() {
         <ResetButton onClick={resetChoice}>reset</ResetButton>
       </MainContent>
       <RecommendationSidebar
-        recommendations={[
-          {
-            id: 0,
-            title: "문제1 타이틀",
-          },
-          {
-            id: 1,
-            title: "문제1 타이틀",
-          },
-          {
-            id: 2,
-            title: "문제1 타이틀",
-          },
-          {
-            id: 3,
-            title: "문제1 타이틀",
-          },
-        ]}
+        isRecommended={isSelected}
+        recommendations={[demo1, demo1]}
       />
     </QuizContainer>
   );

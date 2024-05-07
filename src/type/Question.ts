@@ -21,4 +21,6 @@ interface Question {
   difficulty: number | null;
   // 오답률
   incorrectRate: number | null;
+  // 언제 문제인지
+  // testDate??? : string | null;
 }
