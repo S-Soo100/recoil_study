@@ -74,8 +74,8 @@ const RecommendationSidebar: React.FC<RecommendationSidebarProps> = ({
   return (
     <Sidebar>
       {isRecommended ? (
-        recommendations.map((rec) => (
-          <Container>
+        recommendations.map((rec, index) => (
+          <Container key={index}>
             <StyledButton
               onMouseEnter={() => setIsHovering(true)}
               onMouseMove={handleMouseMove}

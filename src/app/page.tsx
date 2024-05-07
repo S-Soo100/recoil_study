@@ -1,25 +1,23 @@
 "use client";
 import EnglishQuiz from "@/vac/components/EnglishQuiz";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
-import { Button, Layout, Menu, theme } from "antd";
-import Sider from "antd/es/layout/Sider";
-import { Content, Header } from "antd/es/layout/layout";
-import { useState } from "react";
+import MainPage from "@/vac/components/MainPage";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  const router = useRouter();
+  const [randomId, setRandomId] = useState(0);
+  const goToQuizPage = () => {
+    router.push(`/quiz/${1}/${randomId}`);
+  };
+
+  useEffect(() => {
+    setRandomId(2134);
+  }, []);
+
   return (
-    <main>
-      <EnglishQuiz />
+    <main className="max-w-[1080px] mx-auto">
+      <MainPage onClick={goToQuizPage} />
     </main>
   );
 }
