@@ -12,11 +12,9 @@ export default function useLayout({
     padding: 10px;
     margin: 5px 0;
     text-align: start;
-    // background: #edf5fb;
-    background: #222222;
-    border-radius: 4px;
+    border-radius: 0.75rem; /* 12px */
+    background: #447799;
     cursor: pointer;
-    border: 1px solid #edf5fb;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
     &:hover {
       background-color: #dae9f2;
@@ -27,15 +25,50 @@ export default function useLayout({
   const getPageCircle = () => {
     switch (params.type) {
       case "1":
-        return <div>XOOO</div>;
+        return (
+          <div className="gap-2 flex">
+            <div className="w-4 h-4 bg-white border-2 border-slate-400  rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
+          </div>
+        );
       case "2":
-        return <div>OXOO</div>;
+        return (
+          <div className="gap-2 flex">
+            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
+            <div className="w-4 h-4 bg-white border-2 border-slate-400  rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
+          </div>
+        );
       case "3":
-        return <div>OOXO</div>;
+        return (
+          <div className="gap-2 flex">
+            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
+            <div className="w-4 h-4 bg-white border-2 border-slate-400  rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
+          </div>
+        );
       case "4":
-        return <div>OOOX</div>;
+        return (
+          <div className="gap-2 flex">
+            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
+            <div className="w-4 h-4 bg-white border-2 border-slate-400  rounded-full"></div>
+          </div>
+        );
       default:
-        return <div>OOOO</div>;
+        return (
+          <div className="gap-2 flex">
+            <div className="w-4 h-4 bg-white border-2 border-slate-400  rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
+          </div>
+        );
     }
   };
   const goToPrevQuiz = () => {
@@ -69,17 +102,19 @@ export default function useLayout({
         router.push("/quiz/4/1234");
         return;
       case "4":
-        router.push("/quiz/1/1234");
+        router.push("/result");
         return;
       default:
-        router.push("/quiz/1/1234");
+        router.push("/result");
         return;
     }
   };
   return (
     <>
-      <section className="p-1 flex-row bg-slate-800 text-white flex items-center justify-between">
-        <NextButton onClick={goToPrevQuiz}>이전 문제</NextButton>
+      <section className="p-1 flex-row bg-slate-200 text-white flex items-center justify-between border-b-slate-300 shadow-lg">
+        <NextButton onClick={goToPrevQuiz}>
+          {params.type !== "1" ? "이전 문제" : "뒤로 가기"}
+        </NextButton>
         {getPageCircle()}
         <NextButton onClick={goToNextQuiz}>다음 문제</NextButton>
       </section>
