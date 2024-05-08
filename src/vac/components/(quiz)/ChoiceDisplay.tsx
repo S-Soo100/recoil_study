@@ -13,15 +13,15 @@ const AnswerContainer = styled.div`
 `;
 
 const Option = styled.button`
-  padding: 10px;
+  padding: 10px 20px 10px 20px;
   margin: 5px 0;
   text-align: start;
   // background: #edf5fb;
   background: #ffffff;
-  border-radius: 4px;
+  border-radius: 16px;
   cursor: pointer;
   border: 1px solid #edf5fb;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1), 0 -0.4px 3px rgba(0, 0, 0, 0.08);
   &:hover {
     background-color: #dae9f2;
   }

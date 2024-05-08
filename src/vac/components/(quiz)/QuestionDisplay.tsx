@@ -10,7 +10,7 @@ const QuestionContainer = styled.div`
 const QuestionBox = styled.div`
   background-color: #2b6089;
   color: #ffffff;
-  border-radius: 16px;
+  border-radius: 4px;
   padding: 18px;
   font-weight: bold;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -18,11 +18,11 @@ const QuestionBox = styled.div`
 `;
 const ArticleBox = styled.div`
   white-space: pre-wrap;
-  border-radius: 10px;
+  // border-radius: 10px;
   background: #ffffff;
   padding: 20px;
   margin: 12px 2px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 1px rgba(0, 0, 0, 0.07), 0 -11px 3px rgba(0, 0, 0, 0.08);
 `;
 
 interface IProps {
