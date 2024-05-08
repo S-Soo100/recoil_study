@@ -82,33 +82,70 @@ export default function EnglishQuiz() {
   }
 
   if (question === null || question === undefined) {
-    return <div>error</div>;
+    return (
+      <div id="loading skeletons">
+        <QuizContainer>
+          <MainContent>
+            <QuestionDisplay question={"loading..."} article={"loading..."} />
+            <div id="loading_choiceDisplay">
+              <ChoiceDisplay
+                choices={["loading...", "loading..."]}
+                selectedChoice={6}
+                handleClick={() => {}}
+              />
+            </div>
+            <FeedbackDisplay
+              answer={1}
+              isCorrect={true}
+              explanation={"Loading..."}
+              keywords={[
+                {
+                  eng: "loading",
+                  kor: "loading...",
+                },
+              ]}
+            />
+            <ResetButton onClick={resetChoice}>reset</ResetButton>
+          </MainContent>
+          <RecommendationSidebar
+            isRecommended={false}
+            recommendations={[demo1, demo1]}
+          />
+        </QuizContainer>
+        //{" "}
+        <div className="flex min-h-dvh justify-center items-center">
+          // Loading... //{" "}
+        </div>
+      </div>
+    );
   }
 
   return (
-    <QuizContainer>
-      <MainContent>
-        <QuestionDisplay
-          question={question!.question}
-          article={question!.article}
+    <main id="main_quiz">
+      <QuizContainer>
+        <MainContent>
+          <QuestionDisplay
+            question={question!.question}
+            article={question!.article}
+          />
+          <ChoiceDisplay
+            choices={question!.options}
+            selectedChoice={selectedAnswer ?? 6}
+            handleClick={choiceAnswer}
+          />
+          <FeedbackDisplay
+            answer={question!.answer}
+            isCorrect={isCorrect}
+            explanation={question!.solution}
+            keywords={question!.keyWords}
+          />
+          <ResetButton onClick={resetChoice}>reset</ResetButton>
+        </MainContent>
+        <RecommendationSidebar
+          isRecommended={isSelected}
+          recommendations={[demo1, demo1]}
         />
-        <ChoiceDisplay
-          choices={question!.options}
-          selectedChoice={selectedAnswer ?? 6}
-          handleClick={choiceAnswer}
-        />
-        <FeedbackDisplay
-          answer={question!.answer}
-          isCorrect={isCorrect}
-          explanation={question!.solution}
-          keywords={question!.keyWords}
-        />
-        <ResetButton onClick={resetChoice}>reset</ResetButton>
-      </MainContent>
-      <RecommendationSidebar
-        isRecommended={isSelected}
-        recommendations={[demo1, demo1]}
-      />
-    </QuizContainer>
+      </QuizContainer>
+    </main>
   );
 }

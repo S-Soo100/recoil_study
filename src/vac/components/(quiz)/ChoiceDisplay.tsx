@@ -23,7 +23,7 @@ const Option = styled.button`
   border: 1px solid #edf5fb;
   box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1), 0 -0.4px 3px rgba(0, 0, 0, 0.08);
   &:hover {
-    background-color: #dae9f2;
+    background-color: #989898;
   }
 `;
 

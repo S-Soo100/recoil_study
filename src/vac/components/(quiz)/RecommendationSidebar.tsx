@@ -73,31 +73,45 @@ const RecommendationSidebar: React.FC<RecommendationSidebarProps> = ({
 
   return (
     <Sidebar>
-      {isRecommended ? (
-        recommendations.map((rec, index) => (
-          <Container key={index}>
-            <StyledButton
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={() => setIsHovering(false)}
-            >
-              {rec.id + 1}. {rec.question}
-            </StyledButton>
-            {isHovering && (
-              <PreviewBox
-                style={{
-                  left: `${hoverPos.x + 10}px`,
-                  top: `${hoverPos.y + 10}px`,
-                }}
-              >
-                {rec.question + "\n"}
+      <div className=" text-white font-semibold text- whitespace-pre-wrap m-2">
+        동일 유형 추천 문제
+      </div>
 
-                {rec.article}
-              </PreviewBox>
-            )}
-          </Container>
-        ))
+      <br />
+      {isRecommended ? (
+        <Container>
+          <StyledButton>고3 12월 모의고사 문제</StyledButton>
+          <StyledButton>고2 12월 모의고사 문제</StyledButton>
+          <StyledButton>00년도 수능 문제</StyledButton>
+          <div className="m-8"></div>
+          <StyledButton>AI 문제 생성</StyledButton>
+        </Container>
       ) : (
+        // (
+        //   recommendations.map((rec, index) => (
+        //     <Container key={index}>
+        //       <StyledButton
+        //         onMouseEnter={() => setIsHovering(true)}
+        //         onMouseMove={handleMouseMove}
+        //         onMouseLeave={() => setIsHovering(false)}
+        //       >
+        //         {rec.id + 1}. {rec.question}
+        //       </StyledButton>
+        //       {isHovering && (
+        //         <PreviewBox
+        //           style={{
+        //             left: `${hoverPos.x + 10}px`,
+        //             top: `${hoverPos.y + 10}px`,
+        //           }}
+        //         >
+        //           {rec.question + "\n"}
+
+        //           {rec.article}
+        //         </PreviewBox>
+        //       )}
+        //     </Container>
+        //   ))
+        // )
         <div className="m-4 text-white font-bold whitespace-pre-wrap">
           {"문제를 풀면\n비슷한 유형의 문제가 추천됩니다."}
         </div>

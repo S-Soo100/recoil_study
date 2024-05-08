@@ -72,7 +72,7 @@ const Rate = styled.p`
 `;
 
 const CardFooter = styled.div`
-  display: flex;
+  display: flex;5
   margin-top: 2rem;
   justify-content: space-between;
   gap: 3rem;
@@ -138,7 +138,13 @@ const ViewResultPage = ({ goToHomePage, goToRetry, goToNewQuiz }: Props) => {
           </NewChallengeButton>
         </CardFooter>
       </Card>
-      <div></div>
+      <div className="m-8">
+        <p>추가할 항목</p>
+        <p>
+          1) 유형별 오답률 정답률 2) 유형별 어디가 강하고 약한지 3) AI가 볼 때
+          당신은 몇등급 입니다 하고 알려주기
+        </p>
+      </div>
     </Main>
   );
 };
