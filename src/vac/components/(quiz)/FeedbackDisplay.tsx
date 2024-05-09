@@ -8,6 +8,8 @@ const FeedbackContainer = styled.div`
   padding: 30px;
   background-color: #f3eff7;
   font-weight: bold;
+  position: relative;
+  top: -100px;
 `;
 
 const SolutionBox = styled.div`

@@ -12,6 +12,8 @@ const Sidebar = styled.div`
   width: 20vw;
   background-color: #1f435f;
   padding: 10px;
+  position: relative;
+  top: -100px;
 `;
 
 const Container = styled.div`

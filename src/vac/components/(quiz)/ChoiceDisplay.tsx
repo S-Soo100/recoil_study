@@ -10,6 +10,8 @@ type IProps = {
 const AnswerContainer = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
+  top: -100px;
 `;
 
 const Option = styled.button`

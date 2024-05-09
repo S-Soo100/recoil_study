@@ -13,7 +13,6 @@ const QuizContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  // align-items: center;
   max-width: 1600px;
   min-height: 100vh;
   margin-left: auto;
@@ -33,6 +32,21 @@ const ResetButton = styled.button`
   font-weight: bold;
   border-radius: 30px;
   background-color: #ecdafc;
+`;
+
+const FloatAnswer = styled.div`
+  width: 20%;
+  height: 100px;
+  // background-color: #ff2323;
+  position: relative;
+  font-weight: 500;
+  top: -40px;
+  left: 10px;
+  font-size: 32px;
+  transform: rotate(-45deg);
+  z-index: 1;
+  text-shadow: 3px 3px 4px rgba(43, 82, 20, 0.5),
+    -1px -1px 4px rgba(43, 82, 20, 0.5);
 `;
 
 export default function EnglishQuiz() {
@@ -87,7 +101,11 @@ export default function EnglishQuiz() {
         <div id="loading skeletons">
           <QuizContainer>
             <MainContent>
-              <QuestionDisplay question={"loading..."} article={"loading..."} />
+              <div className="h-[100px]"></div>
+              <QuestionDisplay
+                question={"loading..."}
+                article={"loading...\n\n\n\n\n\n\n\n\n\n\n"}
+              />
               <div id="loading_choiceDisplay">
                 <ChoiceDisplay
                   choices={["loading...", "loading..."]}
@@ -121,6 +139,13 @@ export default function EnglishQuiz() {
   return (
     <>
       <div id="main_quiz">
+        <FloatAnswer
+          style={{
+            color: isCorrect ? "chartreuse" : "red",
+          }}
+        >
+          {isSelected ? (isCorrect ? "정답" : "오답") : ""}
+        </FloatAnswer>
         <QuizContainer>
           <MainContent>
             <QuestionDisplay

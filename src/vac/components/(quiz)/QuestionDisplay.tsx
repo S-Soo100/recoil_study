@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-const QuestionContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+  position: relative;
+  top: -100px;
 `;
 
 const QuestionBox = styled.div`
@@ -32,10 +34,10 @@ interface IProps {
 
 const QuestionDisplay: React.FC<IProps> = ({ question, article }) => {
   return (
-    <QuestionContainer>
+    <Container>
       <QuestionBox>Q. {question || "fetching..."}</QuestionBox>
       <ArticleBox>{article || "fetching..."}</ArticleBox>
-    </QuestionContainer>
+    </Container>
   );
 };
 
