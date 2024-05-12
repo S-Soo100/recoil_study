@@ -23,7 +23,7 @@ export default function useLayout({
   const router = useRouter();
   const params = useParams();
   const getPageCircle = () => {
-    switch (params.type) {
+    switch (params!.type) {
       case "1":
         return (
           <div className="gap-2 flex">
@@ -72,7 +72,7 @@ export default function useLayout({
     }
   };
   const goToPrevQuiz = () => {
-    switch (params.type) {
+    switch (params!.type) {
       case "1":
         router.replace("/");
         return;
@@ -91,7 +91,7 @@ export default function useLayout({
     }
   };
   const goToNextQuiz = () => {
-    switch (params.type) {
+    switch (params!.type) {
       case "1":
         router.push("/quiz/2/1234");
         return;
@@ -113,7 +113,7 @@ export default function useLayout({
     <>
       <section className="p-1 flex-row bg-slate-200 text-white flex items-center justify-between border-b-slate-300 shadow-lg">
         <NextButton onClick={goToPrevQuiz}>
-          {params.type !== "1" ? "이전 문제" : "뒤로 가기"}
+          {params!.type !== "1" ? "이전 문제" : "뒤로 가기"}
         </NextButton>
         {getPageCircle()}
         <NextButton onClick={goToNextQuiz}>다음 문제</NextButton>

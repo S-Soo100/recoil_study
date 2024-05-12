@@ -5,7 +5,7 @@ import QuestionDisplay from "./(quiz)/QuestionDisplay";
 import ChoiceDisplay from "./(quiz)/ChoiceDisplay";
 import RecommendationSidebar from "./(quiz)/RecommendationSidebar";
 import FeedbackDisplay from "./(quiz)/FeedbackDisplay";
-import { fetchDemo } from "@/api/fetchDemo";
+import { fetchDemo } from "@/pages/api/fetchDemo";
 import { demo1 } from "@/demo/demo";
 
 const QuizContainer = styled.div`

@@ -15,17 +15,16 @@ const AnswerContainer = styled.div`
 `;
 
 const Option = styled.button`
-  padding: 10px 20px 10px 20px;
-  margin: 5px 0;
+  padding: 8px 16px 8px 16px;
+  margin: 3px 0;
   text-align: start;
   // background: #edf5fb;
-  background: #ffffff;
+  background-color: #d3d3d3;
   border-radius: 16px;
   cursor: pointer;
-  border: 1px solid #edf5fb;
-  box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1), 0 -0.4px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 -0.2px 1px rgba(0, 0, 0, 0.01);
   &:hover {
-    background-color: #989898;
+    background-color: #ffffff;
   }
 `;
 
@@ -37,7 +36,9 @@ const ChoiceDisplay = ({ choices, selectedChoice, handleClick }: IProps) => {
           key={e}
           onClick={() => handleClick(index)}
           style={{
-            color: selectedChoice === index ? "cornflowerblue" : "black",
+            backgroundColor: selectedChoice === index ? "black" : "white",
+            color: selectedChoice === index ? "#D2D2D2" : "black",
+            fontWeight: selectedChoice === index ? 700 : 400,
           }}
         >
           {`(${index + 1}) ${e}`}

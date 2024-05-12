@@ -14,9 +14,11 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "antd": "^5.16.4",
+    "axios": "^1.6.8",
     "next": "14.2.2",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/node": "^20",
