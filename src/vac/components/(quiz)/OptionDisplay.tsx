@@ -24,7 +24,7 @@ const Option = styled.button`
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 -0.2px 1px rgba(0, 0, 0, 0.01);
   &:hover {
-    background-color: #ffffff;
+    background-color: #e3e3e3;
   }
 `;
 
@@ -37,7 +37,7 @@ const OptionDisplay = ({
     <AnswerContainer>
       {choices.map((e, index) => (
         <Option
-          key={e}
+          key={index}
           onClick={() => handleClick(index)}
           style={{
             backgroundColor: selectedChoice === index ? "black" : "white",

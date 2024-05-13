@@ -82,13 +82,14 @@ const RecommendationSidebar: React.FC<RecommendationSidebarProps> = ({
       <br />
       {isRecommended ? (
         <Container>
-          <StyledButton>고3 12월 모의고사 문제</StyledButton>
-          <StyledButton>고2 12월 모의고사 문제</StyledButton>
-          <StyledButton>00년도 수능 문제</StyledButton>
-          <div className="m-8"></div>
-          <StyledButton>AI 문제 생성</StyledButton>
+          <StyledButton key={"3"}>고3 12월 모의고사 문제</StyledButton>
+          <StyledButton key={"2"}>고2 12월 모의고사 문제</StyledButton>
+          <StyledButton key={"4"}>00년도 수능 문제</StyledButton>
+          <div className="m-8" key={"spacer"}></div>
+          <StyledButton key={"5"}>AI 문제 생성</StyledButton>
         </Container>
       ) : (
+        //! 추후 수정한 뒤에 사용하기
         // (
         //   recommendations.map((rec, index) => (
         //     <Container key={index}>

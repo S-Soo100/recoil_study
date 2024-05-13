@@ -38,8 +38,8 @@ interface IProps {
 const QuestionDisplay: React.FC<IProps> = ({ question, article }) => {
   return (
     <Container>
-      <QuestionBox>Q. {question || "fetching..."}</QuestionBox>
-      <ArticleBox>{article || "fetching..."}</ArticleBox>
+      <QuestionBox id="questionBox">Q. {question || "fetching..."}</QuestionBox>
+      <ArticleBox id="articleBox">{article || "fetching..."}</ArticleBox>
     </Container>
   );
 };

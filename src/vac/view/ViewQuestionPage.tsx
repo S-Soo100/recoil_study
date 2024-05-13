@@ -38,6 +38,7 @@ export default function ViewQuestionPage() {
         const response = await fetchDemo();
         setQuestion(response);
       } catch (error) {
+        console.log(error);
         setQuestion(demo1);
       }
     }
