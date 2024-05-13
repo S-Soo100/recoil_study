@@ -50,30 +50,20 @@ const FloatAnswer = styled.div`
 `;
 type Props = {
   isLoading: boolean;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
   isSelected: boolean;
-  setIsSelected: Dispatch<SetStateAction<boolean>>;
   selectedAnswer: number;
-  setSelectedAnswer: Dispatch<SetStateAction<number>>;
   isCorrect: boolean | null;
-  setIsCorrect: Dispatch<SetStateAction<boolean | null>>;
   question: Question | null;
-  setQuestion: Dispatch<SetStateAction<Question | null>>;
   choiceAnswer: (val: number) => void;
   resetChoice: () => void;
 };
 
 export default function QuestionPage({
   isLoading,
-  setIsLoading,
   isSelected,
-  setIsSelected,
   selectedAnswer,
-  setSelectedAnswer,
   isCorrect,
-  setIsCorrect,
   question,
-  setQuestion,
   choiceAnswer,
   resetChoice,
 }: Props) {

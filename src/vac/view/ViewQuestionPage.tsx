@@ -48,15 +48,10 @@ export default function ViewQuestionPage() {
   return (
     <QuestionPage
       isLoading={isLoading}
-      setIsLoading={setIsLoading}
       isSelected={isSelected}
-      setIsSelected={setIsSelected}
       selectedAnswer={selectedAnswer}
-      setSelectedAnswer={setSelectedAnswer}
       isCorrect={isCorrect}
-      setIsCorrect={setIsCorrect}
       question={question}
-      setQuestion={setQuestion}
       choiceAnswer={choiceAnswer}
       resetChoice={resetChoice}
     />
