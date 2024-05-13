@@ -48,54 +48,41 @@ const FloatAnswer = styled.div`
   text-shadow: 3px 3px 4px rgba(43, 82, 20, 0.5),
     -1px -1px 4px rgba(43, 82, 20, 0.5);
 `;
+type Props = {
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  isSelected: boolean;
+  setIsSelected: Dispatch<SetStateAction<boolean>>;
+  selectedAnswer: number;
+  setSelectedAnswer: Dispatch<SetStateAction<number>>;
+  isCorrect: boolean | null;
+  setIsCorrect: Dispatch<SetStateAction<boolean | null>>;
+  question: Question | null;
+  setQuestion: Dispatch<SetStateAction<Question | null>>;
+  choiceAnswer: (val: number) => void;
+  resetChoice: () => void;
+};
 
-export default function QuestionPage() {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isSelected, setIsSelected] = useState<boolean>(false);
-  const [selectedAnswer, setSelectedAnswer] = useState<number>(6);
-  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const [question, setQuestion] = useState<Question | null>(null);
-
-  const resetChoice = () => {
-    setIsSelected(false);
-    setSelectedAnswer(6);
-    setIsCorrect(null);
-  };
-
-  const choiceAnswer = (index: number) => {
-    if (!isSelected) {
-      setIsSelected(true);
-
-      setSelectedAnswer(index);
-
-      if (index + 1! === question?.answer) {
-        setIsCorrect(true);
-      } else {
-        setIsCorrect(false);
-      }
-    }
-  };
-
-  useEffect(() => {
-    setIsLoading(true);
-    async function fetchData() {
-      try {
-        const response = await fetchDemo();
-        setQuestion(response);
-      } catch (error) {
-        setQuestion(demo1);
-      }
-    }
-    fetchData();
-
-    setIsLoading(false);
-  }, []);
-
-  if (isLoading) {
-    return <div>Loading</div>;
-  }
-
-  if (question === null || question === undefined || !question.options) {
+export default function QuestionPage({
+  isLoading,
+  setIsLoading,
+  isSelected,
+  setIsSelected,
+  selectedAnswer,
+  setSelectedAnswer,
+  isCorrect,
+  setIsCorrect,
+  question,
+  setQuestion,
+  choiceAnswer,
+  resetChoice,
+}: Props) {
+  if (
+    isLoading ||
+    question === null ||
+    question === undefined ||
+    !question.options
+  ) {
     return (
       <>
         <div id="loading skeletons">
