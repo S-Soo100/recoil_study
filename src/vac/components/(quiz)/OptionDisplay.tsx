@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 
 type IProps = {
-  choices: string[];
+  options: string[];
   selectedChoice: number;
   handleClick: (index: number) => void;
 };
@@ -28,7 +28,11 @@ const Option = styled.button`
   }
 `;
 
-const ChoiceDisplay = ({ choices, selectedChoice, handleClick }: IProps) => {
+const OptionDisplay = ({
+  options: choices,
+  selectedChoice,
+  handleClick,
+}: IProps) => {
   return (
     <AnswerContainer>
       {choices.map((e, index) => (
@@ -41,11 +45,11 @@ const ChoiceDisplay = ({ choices, selectedChoice, handleClick }: IProps) => {
             fontWeight: selectedChoice === index ? 700 : 400,
           }}
         >
-          {`(${index + 1}) ${e}`}
+          {`${e}`}
         </Option>
       ))}
     </AnswerContainer>
   );
 };
 
-export default ChoiceDisplay;
+export default OptionDisplay;

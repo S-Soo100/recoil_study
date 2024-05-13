@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useParams } from "next/navigation";
-import EnglishQuiz from "@/vac/components/EnglishQuiz";
+import QuestionPage from "@/vac/components/QuestionPage";
 
 export default function QuizPage() {
   const params = useParams();
@@ -13,7 +13,7 @@ export default function QuizPage() {
 
   return (
     <div>
-      <EnglishQuiz></EnglishQuiz>
+      <QuestionPage></QuestionPage>
       {/* <p>슬러그 뭐고</p>
       <p>{params.type}</p>
       <p>{params.id}</p> */}

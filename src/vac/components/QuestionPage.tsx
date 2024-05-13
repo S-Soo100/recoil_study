@@ -2,13 +2,13 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import QuestionDisplay from "./(quiz)/QuestionDisplay";
-import ChoiceDisplay from "./(quiz)/ChoiceDisplay";
+import OptionDisplay from "./(quiz)/OptionDisplay";
 import RecommendationSidebar from "./(quiz)/RecommendationSidebar";
 import FeedbackDisplay from "./(quiz)/FeedbackDisplay";
 import { fetchDemo } from "@/pages/api/fetchDemo";
 import { demo1 } from "@/demo/demo";
 
-const QuizContainer = styled.div`
+const QuestionContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.02);
   display: flex;
   flex-direction: row;
@@ -49,7 +49,7 @@ const FloatAnswer = styled.div`
     -1px -1px 4px rgba(43, 82, 20, 0.5);
 `;
 
-export default function EnglishQuiz() {
+export default function QuestionPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number>(6);
@@ -95,11 +95,11 @@ export default function EnglishQuiz() {
     return <div>Loading</div>;
   }
 
-  if (question === null || question === undefined) {
+  if (question === null || question === undefined || !question.options) {
     return (
       <>
         <div id="loading skeletons">
-          <QuizContainer>
+          <QuestionContainer>
             <MainContent>
               <div className="h-[100px]"></div>
               <QuestionDisplay
@@ -107,8 +107,8 @@ export default function EnglishQuiz() {
                 article={"loading...\n\n\n\n\n\n\n\n\n\n\n"}
               />
               <div id="loading_choiceDisplay">
-                <ChoiceDisplay
-                  choices={["loading...", "loading..."]}
+                <OptionDisplay
+                  options={["loading...", "loading..."]}
                   selectedChoice={6}
                   handleClick={() => {}}
                 />
@@ -117,12 +117,7 @@ export default function EnglishQuiz() {
                 answer={1}
                 isCorrect={true}
                 explanation={"Loading..."}
-                keywords={[
-                  {
-                    eng: "loading",
-                    kor: "loading...",
-                  },
-                ]}
+                keywords={["loading...", "loading...", "loading..."]}
               />
               <ResetButton onClick={resetChoice}>reset</ResetButton>
             </MainContent>
@@ -130,11 +125,19 @@ export default function EnglishQuiz() {
               isRecommended={false}
               recommendations={[demo1, demo1]}
             />
-          </QuizContainer>
+          </QuestionContainer>
         </div>
       </>
     );
   }
+
+  const getOptions = (data: string) => {
+    return data.split("\n");
+  };
+
+  const getKeywords = (data: string) => {
+    return data.split("|");
+  };
 
   return (
     <>
@@ -146,22 +149,22 @@ export default function EnglishQuiz() {
         >
           {isSelected ? (isCorrect ? "정답" : "오답") : ""}
         </FloatAnswer>
-        <QuizContainer>
+        <QuestionContainer>
           <MainContent>
             <QuestionDisplay
-              question={question!.question}
-              article={question!.article}
+              question={question.question}
+              article={question.article}
             />
-            <ChoiceDisplay
-              choices={question!.options}
+            <OptionDisplay
+              options={getOptions(question.options)}
               selectedChoice={selectedAnswer ?? 6}
               handleClick={choiceAnswer}
             />
             <FeedbackDisplay
-              answer={question!.answer}
+              answer={question.answer}
               isCorrect={isCorrect}
-              explanation={question!.solution}
-              keywords={question!.keyWords}
+              explanation={question.solution}
+              keywords={getKeywords(question.keyWords)}
             />
             <ResetButton onClick={resetChoice}>reset</ResetButton>
           </MainContent>
@@ -169,7 +172,7 @@ export default function EnglishQuiz() {
             isRecommended={isSelected}
             recommendations={[demo1, demo1]}
           />
-        </QuizContainer>
+        </QuestionContainer>
       </div>
     </>
   );

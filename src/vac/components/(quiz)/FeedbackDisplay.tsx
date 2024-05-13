@@ -31,7 +31,7 @@ interface FeedbackDisplayProps {
   answer: number;
   isCorrect: boolean | null;
   explanation: string;
-  keywords: { eng: string; kor: string }[];
+  keywords: string[];
 }
 
 const FeedbackDisplay: React.FC<FeedbackDisplayProps> = ({
@@ -55,7 +55,7 @@ const FeedbackDisplay: React.FC<FeedbackDisplayProps> = ({
         <p className="m-1 text-blue-600 font-bold">{"<Key words>"}</p>
         {keywords.map((keyword, index) => (
           <div className="m-1" key={index}>
-            {keyword.eng} : {keyword.kor}
+            {keyword}
           </div>
         ))}
       </KeywordBox>
