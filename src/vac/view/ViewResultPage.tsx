@@ -2,6 +2,8 @@
 import styled from "@emotion/styled";
 
 interface Props {
+  totalCount: number;
+  answerCount: number;
   goToHomePage: () => void;
   goToRetry: () => void;
   goToNewQuiz: () => void;
@@ -116,7 +118,15 @@ const NewChallengeButton = styled.button`
   }
 `;
 
-const ViewResultPage = ({ goToHomePage, goToRetry, goToNewQuiz }: Props) => {
+const ViewResultPage = ({
+  totalCount,
+  answerCount,
+  goToHomePage,
+  goToRetry,
+  goToNewQuiz,
+}: Props) => {
+  // const [answerRate, setAnswerRateAtom] = useRecoilState(answerRateAtom);
+  // const statistics = useRecoilValue(answerRateSelector);
   return (
     <Main>
       <AppBar>
@@ -127,10 +137,12 @@ const ViewResultPage = ({ goToHomePage, goToRetry, goToNewQuiz }: Props) => {
       </AppBar>
       <Card>
         <div className="flex flex-row">
-          <Correct>{"75%"}</Correct>
+          <Correct>{(answerCount / totalCount) * 100 + "%"}</Correct>
           <Rate>{"Correct"}</Rate>
         </div>
-        <div className="mb-6">{"0/3문제 정답"}</div>
+        <div className="mb-6">
+          {answerCount + "/" + totalCount + "문제 정답"}
+        </div>
         <CardFooter>
           <RetryButton onClick={goToRetry}>{"다시 풀기"}</RetryButton>
           <NewChallengeButton onClick={goToNewQuiz}>

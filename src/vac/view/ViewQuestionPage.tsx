@@ -4,8 +4,9 @@ import QuestionPage from "../components/QuestionPage";
 import { useParams, useRouter } from "next/navigation";
 import { Question } from "@/type/Question";
 import useFetchQuestions from "@/hook/useFetchQuestion";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { questionAtom } from "@/recoil/question-atom";
+import { answerRateAtom, answerRateSelector } from "@/recoil/answer-rate-atom";
 
 export default function ViewQuestionPage() {
   const params: { type: string } | null = useParams();
@@ -16,6 +17,8 @@ export default function ViewQuestionPage() {
   const [selectedAnswer, setSelectedAnswer] = useState<number>(6);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [question, setQuestion] = useState<Question | null>(null);
+  const [answerRate, setAnswerRateAtom] = useRecoilState(answerRateAtom);
+  const statistics = useRecoilValue(answerRateSelector);
   const choiceAnswer = (index: number) => {
     if (!isSelected) {
       setIsSelected(true);
@@ -24,8 +27,10 @@ export default function ViewQuestionPage() {
 
       if (index + 1! === question?.answer) {
         setIsCorrect(true);
+        setAnswerRateAtom([...answerRate, true]);
       } else {
         setIsCorrect(false);
+        setAnswerRateAtom([...answerRate, false]);
       }
     }
   };
