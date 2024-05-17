@@ -3,20 +3,24 @@ import axios, { AxiosRequestConfig } from "axios";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { questionAtom } from "@/recoil/question-atom";
 import { Question } from "@/type/Question";
-import { questionIdAtom } from "@/recoil/question-id-atom";
 
 const BASE_URL = process.env.NEXT_PUBLIC_AITUTOR_BACKEND_PRODUCT_SERVER;
 
-const useFetchQuestions = (): [Question[] | null, boolean, boolean | null] => {
-  const [questions, setQuestions] = useState<Question[] | null>(null);
+const useFetchQuestions = (): [Question[], boolean, boolean | null] => {
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean | null>(false);
   const [recoilMainQuestion, setRecoilMainQuestion] =
     useRecoilState(questionAtom);
 
+  const questionType = "questionType=1";
+  const solvedQuestions = "solvedQuestions=[]";
+  const length = "length=1";
+  const testType = "testType=1";
+
   // Axios Option
   const axiosOption: AxiosRequestConfig = {
-    url: `${BASE_URL}question`,
+    url: `${BASE_URL}question/random?${questionType}&${solvedQuestions}&${length}&${testType}`,
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -61,11 +65,22 @@ const useFetchQuestions = (): [Question[] | null, boolean, boolean | null] => {
 
       // 3. 값이 없거나 내부 배열이 비었거나 undefined 이면 서버 통신
       try {
-        const response = await axios.request(axiosOption);
-        console.log("case 2");
-        const fetchedQuestions = response.data.data;
+        const arr = [1, 2, 3, 4];
+        let fetchedQuestions: Question[] = [];
+        arr.forEach(async (i, index) => {
+          // console.log(i + "번 호출");
+          // axiosOption.data.questionType = i;
+          const response = await axios.request(axiosOption);
+          const fetchedQuestion = response.data.data as Question[];
+          // console.log("Fetch 결과");
+          // console.log(fetchedQuestion);
+          setQuestions([...questions, ...fetchedQuestion]);
+        });
+        // const response = await axios.request(axiosOption);
+        // console.log("case 2");
+        // const fetchedQuestions = response.data.data;
 
-        if (!fetchedQuestions) {
+        if (questions!.length > 0) {
           setError(true);
           setLoading(false);
           return;
@@ -77,6 +92,8 @@ const useFetchQuestions = (): [Question[] | null, boolean, boolean | null] => {
         );
         setRecoilMainQuestion(fetchedQuestions);
         setQuestions(fetchedQuestions);
+        // console.log("fetchedQuestions");
+        // console.log(fetchedQuestions);
       } catch (error) {
         console.error("Error fetching questions from server", error);
         setError(true);

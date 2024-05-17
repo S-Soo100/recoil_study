@@ -5,8 +5,8 @@ import QuestionDisplay from "./(quiz)/QuestionDisplay";
 import OptionDisplay from "./(quiz)/OptionDisplay";
 import RecommendationSidebar from "./(quiz)/RecommendationSidebar";
 import FeedbackDisplay from "./(quiz)/FeedbackDisplay";
-import { fetchDemo } from "@/pages/api/fetchDemo";
 import { demo1 } from "@/demo/demo";
+import { Question } from "@/type/Question";
 
 const QuestionContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.02);
@@ -76,26 +76,33 @@ export default function QuestionPage({
     return (
       <>
         <div id="loading skeletons">
+          <FloatAnswer
+            style={{
+              color: isCorrect ? "chartreuse" : "red",
+            }}
+          >
+            {isSelected ? (isCorrect ? "정답" : "오답") : ""}
+          </FloatAnswer>
           <QuestionContainer>
             <MainContent>
-              <div className="h-[100px]"></div>
+              <div className=""></div>
               <QuestionDisplay
                 question={"loading..."}
                 article={"loading...\n\n\n\n\n\n\n\n\n\n\n"}
               />
               <div id="loading_choiceDisplay">
                 <OptionDisplay
-                  options={["loading...", "loading..."]}
+                  options={[
+                    "loading...",
+                    "loading...",
+                    "loading...",
+                    "loading...",
+                    "loading...",
+                  ]}
                   selectedChoice={6}
                   handleClick={() => {}}
                 />
               </div>
-              <FeedbackDisplay
-                answer={1}
-                isCorrect={true}
-                explanation={"Loading..."}
-                keywords={["loading...", "loading...", "loading..."]}
-              />
               <ResetButton onClick={resetChoice}>reset</ResetButton>
             </MainContent>
             <RecommendationSidebar

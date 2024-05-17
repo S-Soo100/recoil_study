@@ -2,12 +2,16 @@
 import styled from "@emotion/styled";
 import React from "react";
 import { useParams, useRouter } from "next/navigation";
+import { questionAtom } from "@/recoil/question-atom";
+import { useRecoilState } from "recoil";
 
 export default function useLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [atom, setAtom] = useRecoilState(questionAtom);
+
   const NextButton = styled.button`
     padding: 10px;
     margin: 5px 0;
@@ -77,29 +81,29 @@ export default function useLayout({
         router.replace("/");
         return;
       case "2":
-        router.push("/quiz/1/1234");
+        router.push(`/quiz/1`);
         return;
       case "3":
-        router.push("/quiz/2/1234");
+        router.push(`/quiz/2`);
         return;
       case "4":
-        router.push("/quiz/3/1234");
+        router.push(`/quiz/3`);
         return;
       default:
-        router.push("/quiz/1/1234");
+        router.push(`/quiz/1`);
         return;
     }
   };
   const goToNextQuiz = () => {
     switch (params!.type) {
       case "1":
-        router.push("/quiz/2/1234");
+        router.push("/quiz/2");
         return;
       case "2":
-        router.push("/quiz/3/1234");
+        router.push("/quiz/3");
         return;
       case "3":
-        router.push("/quiz/4/1234");
+        router.push("/quiz/4");
         return;
       case "4":
         router.push("/result");

@@ -7,11 +7,11 @@ const CounterPage = () => {
   useEffect(() => {
     async function fetchUser() {
       const response = await fetch("https://randomuser.me/api/");
-      console.log("response");
-      console.log(response);
+      // console.log("response");
+      // console.log(response);
       const data = await response.json();
-      console.log("data");
-      console.log(data);
+      // console.log("data");
+      // console.log(data);
       setUser(data);
     }
 
