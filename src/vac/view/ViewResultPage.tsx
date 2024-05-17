@@ -130,7 +130,7 @@ const ViewResultPage = ({ goToHomePage, goToRetry, goToNewQuiz }: Props) => {
           <Correct>{"75%"}</Correct>
           <Rate>{"Correct"}</Rate>
         </div>
-        <div>{"0/3문제 정답"}</div>
+        <div className="mb-6">{"0/3문제 정답"}</div>
         <CardFooter>
           <RetryButton onClick={goToRetry}>{"다시 풀기"}</RetryButton>
           <NewChallengeButton onClick={goToNewQuiz}>

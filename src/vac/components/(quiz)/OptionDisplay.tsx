@@ -35,19 +35,24 @@ const OptionDisplay = ({
 }: IProps) => {
   return (
     <AnswerContainer>
-      {choices.map((e, index) => (
-        <Option
-          key={index}
-          onClick={() => handleClick(index)}
-          style={{
-            backgroundColor: selectedChoice === index ? "black" : "white",
-            color: selectedChoice === index ? "#D2D2D2" : "black",
-            fontWeight: selectedChoice === index ? 700 : 400,
-          }}
-        >
-          {`${e}`}
-        </Option>
-      ))}
+      {choices.map((e, index) => {
+        if (e.trim().length < 1) {
+          return null;
+        }
+        return (
+          <Option
+            key={index}
+            onClick={() => handleClick(index)}
+            style={{
+              backgroundColor: selectedChoice === index ? "black" : "white",
+              color: selectedChoice === index ? "#D2D2D2" : "black",
+              fontWeight: selectedChoice === index ? 700 : 400,
+            }}
+          >
+            {`${e}`}
+          </Option>
+        );
+      })}
     </AnswerContainer>
   );
 };

@@ -1,4 +1,4 @@
-interface Question {
+export interface Question {
   // DB내 id
   id: number;
   // Test Number ->g-nnmm 형식, g학년 nn년도 mm월 모의고사 문제

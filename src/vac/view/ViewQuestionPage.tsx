@@ -1,11 +1,13 @@
 "use client";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import styled from "@emotion/styled";
-import { fetchDemo } from "@/pages/api/fetchDemo";
-import { demo1 } from "@/demo/demo";
+import React, { useEffect, useState } from "react";
 import QuestionPage from "../components/QuestionPage";
+import { useParams, useRouter } from "next/navigation";
+import { Question } from "@/type/Question";
+import useFetchQuestions from "@/hook/useFetchQuestion";
 
 export default function ViewQuestionPage() {
+  const params: { type: string; id: string } | null = useParams();
+  const [questions, loading, error] = useFetchQuestions();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number>(6);
@@ -31,21 +33,16 @@ export default function ViewQuestionPage() {
     setIsCorrect(null);
   };
 
+  const router = useRouter();
   useEffect(() => {
     setIsLoading(true);
-    async function fetchData() {
-      try {
-        const response = await fetchDemo();
-        setQuestion(response);
-      } catch (error) {
-        console.log(error);
-        setQuestion(demo1);
-      }
+
+    if (questions) {
+      setQuestion(questions[parseInt(params?.type ?? "2") - 1]);
     }
-    fetchData();
 
     setIsLoading(false);
-  }, []);
+  }, [questions]);
   return (
     <QuestionPage
       isLoading={isLoading}
