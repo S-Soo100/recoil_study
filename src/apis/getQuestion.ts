@@ -1,5 +1,6 @@
 import { Question } from "@/type/Question";
 import axios, { AxiosRequestConfig } from "axios";
+import { setBaseUrls } from "./html";
 
 const BASE_URL = process.env.NEXT_PUBLIC_AITUTOR_BACKEND_PRODUCT_SERVER;
 
@@ -16,12 +17,13 @@ export const getQuestion = async ({
   length,
   testType,
 }: IProps): Promise<Question[] | null> => {
+  setBaseUrls();
   console.log(`getQuestion ${questionType}`);
   // console.log(
   //   `${BASE_URL}question/random?questionType=${questionType}&solvedQuestions=${solvedQuestions}&length=${length}&testType=${testType}`
   // );
   const axiosOption: AxiosRequestConfig = {
-    url: `${BASE_URL}question/random?questionType=${questionType}&solvedQuestions=${solvedQuestions}&length=${length}&testType=${testType}`,
+    url: `question/random?questionType=${questionType}&solvedQuestions=${solvedQuestions}&length=${length}&testType=${testType}`,
     method: "GET",
     headers: {
       "Content-Type": "application/json",
