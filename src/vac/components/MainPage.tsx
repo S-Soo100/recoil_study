@@ -5,13 +5,17 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import Link from "next/link";
-import { JSX, SVGProps } from "react";
+import { JSX, SVGProps, useState } from "react";
+import { render } from "react-dom";
+import { Circles, Radio } from "react-loader-spinner";
+import Loader from "./Loader";
 
 type IProps = {
   onClick: () => void;
+  loading: boolean;
 };
 
-export default function Component({ onClick }: IProps) {
+export default function Component({ onClick, loading }: IProps) {
   return (
     <main className="">
       <section className="w-full py-12 md:py-24 lg:py-32 ">
@@ -151,6 +155,7 @@ export default function Component({ onClick }: IProps) {
           </div>
         </div>
       </section>
+      {loading ? <Loader loading={loading} /> : <div></div>}
     </main>
   );
 }
