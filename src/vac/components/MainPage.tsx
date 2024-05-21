@@ -58,70 +58,70 @@ export default function Component({ onClick }: IProps) {
           </div>
         </div>
       </section>
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800 text-white">
+      <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-800 text-white">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
                 Helpful Resources
               </h2>
-              <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+              <p className="max-w-[900px] text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
                 Explore our collection of study guides, practice exercises, and
                 links to valuable websites to enhance your English learning
                 journey.
               </p>
             </div>
             <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+              <div className="rounded-lg border  p-4 shadow-sm border-gray-800 bg-gray-950">
                 <h3 className="text-lg font-bold">Study Guides</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-gray-400">
                   Comprehensive guides to improve your grammar, vocabulary, and
                   writing skills.
                 </p>
                 <Link
-                  className="mt-2 inline-flex items-center text-sm font-medium text-gray-900 hover:underline dark:text-gray-50"
+                  className="mt-2 inline-flex items-center text-sm font-medium  hover:underline text-gray-50"
                   href="#"
                 >
                   Explore Guides
                   <ArrowRightIcon className="ml-1 h-4 w-4" />
                 </Link>
               </div>
-              <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+              <div className="rounded-lg border p-4 shadow-sm border-gray-800 bg-gray-950">
                 <h3 className="text-lg font-bold">Practice Exercises</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-gray-400">
                   Interactive exercises to reinforce your language skills and
                   boost your confidence.
                 </p>
                 <Link
-                  className="mt-2 inline-flex items-center text-sm font-medium text-gray-900 hover:underline dark:text-gray-50"
+                  className="mt-2 inline-flex items-center text-sm font-medium  hover:underline text-gray-50"
                   href="#"
                 >
                   Try Exercises
                   <ArrowRightIcon className="ml-1 h-4 w-4" />
                 </Link>
               </div>
-              <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+              <div className="rounded-lg border  p-4 shadow-sm border-gray-800 bg-gray-950">
                 <h3 className="text-lg font-bold">Helpful Websites</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm  text-gray-400">
                   Discover a curated list of websites to enhance your English
                   language learning.
                 </p>
                 <Link
-                  className="mt-2 inline-flex items-center text-sm font-medium text-gray-900 hover:underline dark:text-gray-50"
+                  className="mt-2 inline-flex items-center text-sm font-medium  hover:underline text-gray-50"
                   href="#"
                 >
                   Visit Websites
                   <ArrowRightIcon className="ml-1 h-4 w-4" />
                 </Link>
               </div>
-              <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+              <div className="rounded-lg border  p-4 shadow-sm border-gray-800 bg-gray-950">
                 <h3 className="text-lg font-bold">Feedback & Support</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm ">
                   Share your thoughts, ask questions, or request additional
                   support.
                 </p>
                 <Link
-                  className="mt-2 inline-flex items-center text-sm font-medium text-gray-900 hover:underline dark:text-gray-50"
+                  className="mt-2 inline-flex items-center text-sm font-medium hover:underline text-gray-50"
                   href="#"
                 >
                   Contact Us
@@ -139,7 +139,7 @@ export default function Component({ onClick }: IProps) {
               <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
                 팀 이름(미정)
               </h2>
-              <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed whitespace-pre-line lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+              <p className="max-w-[900px]  md:text-xl/relaxed whitespace-pre-line lg:text-base/relaxed xl:text-xl/relaxed text-gray-400">
                 {"팀 구성원 누구누구누구\n연락처 - 어디어디어디"}
               </p>
             </div>
