@@ -7,11 +7,11 @@ import useFetchQuestions from "@/hook/useFetchQuestion";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { questionAtom } from "@/recoil/question-atom";
 import { answerRateAtom, answerRateSelector } from "@/recoil/answer-rate-atom";
+import { demo1 } from "@/demo/demo";
 
 export default function ViewQuestionPage() {
   const params: { type: string } | null = useParams();
   const atom = useRecoilValue(questionAtom);
-  // const [questions, loading, error] = useFetchQuestions();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number>(6);
@@ -19,6 +19,7 @@ export default function ViewQuestionPage() {
   const [question, setQuestion] = useState<Question | null>(null);
   const [answerRate, setAnswerRateAtom] = useRecoilState(answerRateAtom);
   const statistics = useRecoilValue(answerRateSelector);
+
   const choiceAnswer = (index: number) => {
     if (!isSelected) {
       setIsSelected(true);
@@ -48,6 +49,10 @@ export default function ViewQuestionPage() {
     // if (questions) {
     setQuestion(atom[parseInt(params?.type ?? "2") - 1]);
     // }
+
+    if (atom.length < 1) {
+      setQuestion(demo1);
+    }
 
     setIsLoading(false);
   }, [atom]);

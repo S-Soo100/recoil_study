@@ -7,6 +7,8 @@ import RecommendationSidebar from "./(quiz)/RecommendationSidebar";
 import FeedbackDisplay from "./(quiz)/FeedbackDisplay";
 import { demo1 } from "@/demo/demo";
 import { Question } from "@/type/Question";
+import Loader from "./Loader";
+import { useRouter } from "next/navigation";
 
 const QuestionContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.02);
@@ -67,12 +69,8 @@ export default function QuestionPage({
   choiceAnswer,
   resetChoice,
 }: Props) {
-  if (
-    isLoading ||
-    question === null ||
-    question === undefined ||
-    !question.options
-  ) {
+  const router = useRouter();
+  if (question === null || question === undefined || !question.options) {
     return (
       <>
         <div id="loading skeletons">
@@ -111,6 +109,7 @@ export default function QuestionPage({
             />
           </QuestionContainer>
         </div>
+        <Loader loading={true} size="60" />
       </>
     );
   }
@@ -158,6 +157,7 @@ export default function QuestionPage({
           />
         </QuestionContainer>
       </div>
+      {isLoading ? <Loader loading={isLoading} size="60" /> : <div></div>}
     </>
   );
 }

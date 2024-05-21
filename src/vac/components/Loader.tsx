@@ -1,6 +1,6 @@
 // components/Loader.js
 import React from "react";
-import { Oval } from "react-loader-spinner";
+import { Grid, Oval } from "react-loader-spinner";
 import styled from "@emotion/styled";
 
 const LoaderStyle = styled.div`
@@ -22,21 +22,37 @@ const LoaderOverlay = styled.div`
   z-index: 1000; /* 다른 요소들 위에 위치 */
 `;
 
-const Loader = ({ loading }: { loading: boolean }) => {
+const Loader = ({
+  loading,
+  size = "80",
+}: {
+  loading: boolean;
+  size?: string;
+}) => {
   if (!loading) return <div></div>;
   return (
     <LoaderOverlay>
       <LoaderStyle className="loader-container">
-        <Oval
-          height={80}
-          width={80}
-          color="#4fa94d"
+        <Grid
+          visible={loading}
+          height={size}
+          width={size}
+          color="#7BAFD4"
+          ariaLabel="grid-loading"
+          radius="12.5"
+          wrapperStyle={{}}
+          wrapperClass="grid-wrapper"
+        />
+        {/* <Oval
+          height={size}
+          width={size}
+          color="#7D55C7"
           visible={loading}
           ariaLabel="oval-loading"
-          secondaryColor="#4fa94d"
-          strokeWidth={2}
-          strokeWidthSecondary={2}
-        />
+          secondaryColor="#D5C2D8"
+          strokeWidth={8}
+          strokeWidthSecondary={6}
+        /> */}
       </LoaderStyle>
     </LoaderOverlay>
   );
