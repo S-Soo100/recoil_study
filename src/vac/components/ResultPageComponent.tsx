@@ -7,7 +7,7 @@ import { answerRateAtom, answerRateSelector } from "@/recoil/answer-rate-atom";
 import { useState } from "react";
 import { initMainQuestion } from "@/service/initMainQuestion";
 
-const ResultPage = () => {
+const ResultPageComponent = () => {
   const [loading, setLoading] = useState(false);
   const [answerRate, setAnswerRateAtom] = useRecoilState(answerRateAtom);
   const statistics = useRecoilValue(answerRateSelector);
@@ -56,4 +56,4 @@ const ResultPage = () => {
   );
 };
 
-export default ResultPage;
+export default ResultPageComponent;

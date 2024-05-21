@@ -13,9 +13,9 @@ type IProps = {
   loading: boolean;
 };
 
-export default function Component({ onClick, loading }: IProps) {
+export default function ViewMainPage({ onClick, loading }: IProps) {
   return (
-    <main className="">
+    <main className="bg-white">
       <section className="w-full py-12 md:py-24 lg:py-32 ">
         <div className="container px-4 md:px-6">
           <div className="grid gap-4 px-10 md:grid-cols-2 md:gap-16">

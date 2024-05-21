@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useState } from "react";
-import ViewCounter from "../view/ViewCounter";
+import ViewCounter from "./ViewCounter";
 
 const Counter = () => {
   const [value, setValue] = useState(0);

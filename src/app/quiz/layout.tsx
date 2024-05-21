@@ -4,7 +4,7 @@ import React from "react";
 import { useParams, useRouter } from "next/navigation";
 import { questionAtom } from "@/recoil/question-atom";
 import { useRecoilState } from "recoil";
-import HomeButton from "@/vac/components/(result)/HomeButton";
+import HomeButton from "@/vac/view/(result)/HomeButton";
 
 export default function useLayout({
   children,

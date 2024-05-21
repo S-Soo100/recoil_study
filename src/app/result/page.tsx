@@ -1,6 +1,6 @@
-import ResultPage from "@/vac/components/ResultPage";
+import ResultPageComponent from "@/vac/components/ResultPageComponent";
 import React from "react";
 
 export default function Page() {
-  return <ResultPage />;
+  return <ResultPageComponent />;
 }

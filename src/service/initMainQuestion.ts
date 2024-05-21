@@ -1,7 +1,5 @@
 import { getQuestion } from "@/apis/getQuestion";
-import { questionAtom } from "@/recoil/question-atom";
 import { Question } from "@/type/Question";
-import { SetterOrUpdater, useRecoilState, useRecoilValue } from "recoil";
 
 type IProps = {
   setAtom: (val: Question[]) => void;

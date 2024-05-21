@@ -1,7 +1,4 @@
 "use client";
-// import styled from "@emotion/styled";
-import { Input } from "@nextui-org/input";
-
 // const Main = styled.div`
 //   display: flex;
 //   justify-content: center;

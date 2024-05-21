@@ -1,7 +1,7 @@
 "use client";
 import styled from "@emotion/styled";
-import HomeButton from "../components/(result)/HomeButton";
-import Loader from "../components/Loader";
+import HomeButton from "./(result)/HomeButton";
+import Loader from "./Loader";
 
 interface Props {
   totalCount: number;
