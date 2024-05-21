@@ -1,3 +1,5 @@
+import { Question } from "@/type/Question";
+
 export const demo1: Question = {
   id: 100,
   question: "다음 글의 목적으로 가장 적절한 것은?",

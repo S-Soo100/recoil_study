@@ -6,8 +6,6 @@
  */
 import Link from "next/link";
 import { JSX, SVGProps, useState } from "react";
-import { render } from "react-dom";
-import { Circles, Radio } from "react-loader-spinner";
 import Loader from "./Loader";
 
 type IProps = {

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import { Question } from "@/type/Question";
 
 interface HoverPosition {
   x: number;
