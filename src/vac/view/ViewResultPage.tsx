@@ -1,9 +1,12 @@
 "use client";
 import styled from "@emotion/styled";
+import HomeButton from "../components/(result)/HomeButton";
+import Loader from "../components/Loader";
 
 interface Props {
   totalCount: number;
   answerCount: number;
+  loading: boolean;
   goToHomePage: () => void;
   goToRetry: () => void;
   goToNewQuiz: () => void;
@@ -24,27 +27,27 @@ const AppBar = styled.span`
   padding: 0.5rem 1rem 0.5rem 1rem;
 `;
 
-const HomeButton = styled.button`
-  background-color: #fefcfa;
-  color: #4e4e4e;
-  border: none;
-  border-radius: 0.375rem;
-  padding: 0.5rem 1rem;
-  font-size: 16px;
-  font-weight: 600;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &:hover {
-    box-shadow: 0 3px 17px 3px rgb(0 0 0 / 0.2);
-  }
-`;
+// const HomeButton = styled.button`
+//   background-color: #fefcfa;
+//   color: #4e4e4e;
+//   border: none;
+//   border-radius: 0.375rem;
+//   padding: 0.5rem 1rem;
+//   font-size: 16px;
+//   font-weight: 600;
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   &:hover {
+//     box-shadow: 0 3px 17px 3px rgb(0 0 0 / 0.2);
+//   }
+// `;
 
-const HomeIcon = styled.span`
-  margin-right: 8px;
-  font-size: 20px;
-`;
+// const HomeIcon = styled.span`
+//   margin-right: 8px;
+//   font-size: 20px;
+// `;
 
 const Card = styled.span`
   display: flex;
@@ -121,43 +124,47 @@ const NewChallengeButton = styled.button`
 const ViewResultPage = ({
   totalCount,
   answerCount,
+  loading,
   goToHomePage,
   goToRetry,
   goToNewQuiz,
 }: Props) => {
   // const [answerRate, setAnswerRateAtom] = useRecoilState(answerRateAtom);
   // const statistics = useRecoilValue(answerRateSelector);
+
+  const correctRate = () => ((answerCount / totalCount) * 100).toFixed();
+
   return (
-    <Main>
-      <AppBar>
-        <HomeButton onClick={goToHomePage}>
-          <HomeIcon>🏠</HomeIcon>
-          {" Home"}
-        </HomeButton>
-      </AppBar>
-      <Card>
-        <div className="flex flex-row">
-          <Correct>{(answerCount / totalCount) * 100 + "%"}</Correct>
-          <Rate>{"Correct"}</Rate>
+    <>
+      <Main>
+        <AppBar>
+          <HomeButton onClick={goToHomePage} />
+        </AppBar>
+        <Card>
+          <div className="flex flex-row">
+            <Correct>{correctRate() + "%"}</Correct>
+            <Rate>{"Correct"}</Rate>
+          </div>
+          <div className="mb-6">
+            {answerCount + "/" + totalCount + "문제 정답"}
+          </div>
+          <CardFooter>
+            <RetryButton onClick={goToRetry}>{"다시 풀기"}</RetryButton>
+            <NewChallengeButton onClick={goToNewQuiz}>
+              {"새로운 문제 풀기"}
+            </NewChallengeButton>
+          </CardFooter>
+        </Card>
+        <div className="m-8">
+          <p>추가할 항목</p>
+          <p>
+            1) 유형별 오답률 정답률 2) 유형별 어디가 강하고 약한지 3) AI가 볼 때
+            당신은 몇등급 입니다 하고 알려주기
+          </p>
         </div>
-        <div className="mb-6">
-          {answerCount + "/" + totalCount + "문제 정답"}
-        </div>
-        <CardFooter>
-          <RetryButton onClick={goToRetry}>{"다시 풀기"}</RetryButton>
-          <NewChallengeButton onClick={goToNewQuiz}>
-            {"새로운 문제 풀기"}
-          </NewChallengeButton>
-        </CardFooter>
-      </Card>
-      <div className="m-8">
-        <p>추가할 항목</p>
-        <p>
-          1) 유형별 오답률 정답률 2) 유형별 어디가 강하고 약한지 3) AI가 볼 때
-          당신은 몇등급 입니다 하고 알려주기
-        </p>
-      </div>
-    </Main>
+      </Main>
+      {loading ? <Loader loading={loading} /> : <div></div>}
+    </>
   );
 };
 

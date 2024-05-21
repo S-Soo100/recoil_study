@@ -3,10 +3,9 @@ import React, { useEffect, useState } from "react";
 import QuestionPage from "../components/QuestionPage";
 import { useParams, useRouter } from "next/navigation";
 import { Question } from "@/type/Question";
-import useFetchQuestions from "@/hook/useFetchQuestion";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { questionAtom } from "@/recoil/question-atom";
-import { answerRateAtom, answerRateSelector } from "@/recoil/answer-rate-atom";
+import { answerRateAtom } from "@/recoil/answer-rate-atom";
 import { demo1 } from "@/demo/demo";
 
 export default function ViewQuestionPage() {
@@ -18,7 +17,6 @@ export default function ViewQuestionPage() {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [question, setQuestion] = useState<Question | null>(null);
   const [answerRate, setAnswerRateAtom] = useRecoilState(answerRateAtom);
-  const statistics = useRecoilValue(answerRateSelector);
 
   const choiceAnswer = (index: number) => {
     if (!isSelected) {
@@ -54,7 +52,9 @@ export default function ViewQuestionPage() {
       setQuestion(demo1);
     }
 
-    setIsLoading(false);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
   }, [atom]);
   return (
     <QuestionPage

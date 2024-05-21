@@ -1,10 +1,7 @@
 "use client";
-import QuestionPage from "@/vac/components/QuestionPage";
 import MainPage from "@/vac/components/MainPage";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { StoreApi } from "zustand";
-import { questionIdAtom } from "@/recoil/question-id-atom";
+import { useState } from "react";
 import { initMainQuestion } from "@/service/initMainQuestion";
 import { useRecoilState } from "recoil";
 import { questionAtom } from "@/recoil/question-atom";
