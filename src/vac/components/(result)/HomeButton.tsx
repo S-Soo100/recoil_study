@@ -7,8 +7,8 @@ const HomeButtonStyle = styled.button`
   color: #4e4e4e;
   border: none;
   border-radius: 0.375rem;
-  padding: 0.5rem 1rem;
-  font-size: 16px;
+  padding: 0.3rem 0.7rem;
+  font-size: 14px;
   font-weight: 600;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;

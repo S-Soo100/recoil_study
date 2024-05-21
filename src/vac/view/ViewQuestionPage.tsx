@@ -11,7 +11,7 @@ import { demo1 } from "@/demo/demo";
 export default function ViewQuestionPage() {
   const params: { type: string } | null = useParams();
   const atom = useRecoilValue(questionAtom);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number>(6);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -19,19 +19,23 @@ export default function ViewQuestionPage() {
   const [answerRate, setAnswerRateAtom] = useRecoilState(answerRateAtom);
 
   const choiceAnswer = (index: number) => {
-    if (!isSelected) {
-      setIsSelected(true);
+    setLoading(true);
+    setTimeout(() => {
+      if (!isSelected) {
+        setIsSelected(true);
 
-      setSelectedAnswer(index);
+        setSelectedAnswer(index);
 
-      if (index + 1! === question?.answer) {
-        setIsCorrect(true);
-        setAnswerRateAtom([...answerRate, true]);
-      } else {
-        setIsCorrect(false);
-        setAnswerRateAtom([...answerRate, false]);
+        if (index + 1! === question?.answer) {
+          setIsCorrect(true);
+          setAnswerRateAtom([...answerRate, true]);
+        } else {
+          setIsCorrect(false);
+          setAnswerRateAtom([...answerRate, false]);
+        }
       }
-    }
+      setLoading(false);
+    }, 300);
   };
 
   const resetChoice = () => {
@@ -42,7 +46,7 @@ export default function ViewQuestionPage() {
 
   const router = useRouter();
   useEffect(() => {
-    setIsLoading(true);
+    setLoading(true);
 
     // if (questions) {
     setQuestion(atom[parseInt(params?.type ?? "2") - 1]);
@@ -53,12 +57,12 @@ export default function ViewQuestionPage() {
     }
 
     setTimeout(() => {
-      setIsLoading(false);
+      setLoading(false);
     }, 500);
   }, [atom]);
   return (
     <QuestionPage
-      isLoading={isLoading}
+      isLoading={loading}
       isSelected={isSelected}
       selectedAnswer={selectedAnswer}
       isCorrect={isCorrect}

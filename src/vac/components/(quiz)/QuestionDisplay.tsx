@@ -10,12 +10,12 @@ const Container = styled.div`
 `;
 
 const QuestionBox = styled.div`
-  // background-color: #2b6089;
-  background-color: rgb(242, 242, 242);
-  // color: #ffffff;
+  background-color: #44444c;
+  // background-color: rgb(242, 242, 242);
+  color: #ffffff;
   border-radius: 4px;
   padding: 10px;
-  font-weight: bold;
+  font-weight: 500j;
   // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   font-size: 18px;
 `;

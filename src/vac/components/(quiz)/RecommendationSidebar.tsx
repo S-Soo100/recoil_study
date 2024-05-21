@@ -11,7 +11,7 @@ interface HoverPosition {
 
 const Sidebar = styled.div`
   width: 20vw;
-  background-color: #1f435f;
+  background-color: #385e72;
   padding: 10px;
   position: relative;
   top: -100px;

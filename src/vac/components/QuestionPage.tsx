@@ -149,7 +149,7 @@ export default function QuestionPage({
               explanation={question.solution}
               keywords={getKeywords(question.keyWords)}
             />
-            <ResetButton onClick={resetChoice}>reset</ResetButton>
+            {/* <ResetButton onClick={resetChoice}>reset</ResetButton> */}
           </MainContent>
           <RecommendationSidebar
             isRecommended={isSelected}
