@@ -26,10 +26,6 @@ export default function RecommendPage() {
   const [recommend3, setRecommend3Atom] = useRecoilState(recommend3Atom);
   const [recommend4, setRecommend4Atom] = useRecoilState(recommend4Atom);
 
-  useEffect(() => {
-    setQuestion(getQuestionById(params!.id)!);
-  }, []);
-
   const getAtomsByNumber = (type: string) => {
     switch (type) {
       case "1":
@@ -75,6 +71,10 @@ export default function RecommendPage() {
       }, 300);
     }
   };
+
+  useEffect(() => {
+    setQuestion(getQuestionById(params!.id)!);
+  }, [getQuestionById, params]);
 
   return (
     <div>
