@@ -43,7 +43,7 @@ export default function useLayout({
         return (
           <div className="gap-2 flex">
             <div className="w-4 h-4 bg-slate-100 border-[2px] border-slate-300 rounded-full"></div>
-            <div className="w-4 h-4 bg-[#6AABD2] border-[2px] border-slate-300  rounded-full"></div>
+            <div className="w-4 h-4 bg-[#6AABD2] border-[2px] border-white  rounded-full"></div>
             <div className="w-4 h-4 bg-slate-100 border-[2px] border-slate-300 rounded-full"></div>
             <div className="w-4 h-4 bg-slate-100 border-[2px] border-slate-300 rounded-full"></div>
           </div>
@@ -53,26 +53,26 @@ export default function useLayout({
           <div className="gap-2 flex">
             <div className="w-4 h-4 bg-slate-100 border-[2px] border-slate-300 rounded-full"></div>
             <div className="w-4 h-4 bg-slate-100 border-[2px] border-slate-300 rounded-full"></div>
-            <div className="w-4 h-4 bg-[#6AABD2] border-[2px] border-slate-300  rounded-full"></div>
+            <div className="w-4 h-4 bg-[#6AABD2] border-[2px] border-white  rounded-full"></div>
             <div className="w-4 h-4 bg-slate-100 border-[2px] border-slate-300 rounded-full"></div>
           </div>
         );
       case "4":
         return (
           <div className="gap-2 flex">
-            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
-            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
-            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-400 rounded-full"></div>
-            <div className="w-4 h-4 bg-[#6AABD2] border-2 border-slate-400  rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-100 border-[2px] border-slate-300 rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-100 border-[2px] border-slate-300 rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-100 border-[2px] border-slate-300 rounded-full"></div>
+            <div className="w-4 h-4 bg-[#6AABD2] border-2 border-white rounded-full"></div>
           </div>
         );
       default:
         return (
           <div className="gap-2 flex">
-            <div className="w-4 h-4 bg-[#6AABD2] border-2 border-slate-300  rounded-full"></div>
-            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-700 rounded-full"></div>
-            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-700 rounded-full"></div>
-            <div className="w-4 h-4 bg-slate-800 border-2 border-slate-700 rounded-full"></div>
+            <div className="w-4 h-4 bg-[#6AABD2] border-[2px] border-white  rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-100 border-[2px] border-slate-300 rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-100 border-[2px] border-slate-300 rounded-full"></div>
+            <div className="w-4 h-4 bg-slate-100 border-[2px] border-slate-300 rounded-full"></div>
           </div>
         );
     }
