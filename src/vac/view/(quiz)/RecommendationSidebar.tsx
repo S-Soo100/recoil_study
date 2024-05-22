@@ -73,6 +73,71 @@ const RecommendationSidebar: React.FC<RecommendationSidebarProps> = ({
     });
   };
 
+  const getQuestionTitleByTestNumber = (testNumber: string) => {
+    const titles: string[] = [];
+    switch (testNumber[0]) {
+      case "1":
+        titles.push("고1 ");
+        break;
+      case "2":
+        titles.push("고2 ");
+        break;
+      case "3":
+        titles.push("고3 ");
+        break;
+      case "4":
+        titles.push(testNumber.slice(2, 4) + "년도 ");
+        titles.push("수능 문제");
+        return titles.reduce(
+          (accumulator, currentValue) => accumulator + currentValue,
+          ""
+        );
+      case "5":
+        titles.push("AI생성 문제");
+        return "AI생성 문제";
+      default:
+        titles.push("수능 ");
+        break;
+    }
+    titles.push(testNumber.slice(2, 4) + "년도 ");
+    titles.push(testNumber.slice(4, 6) + "월 문제");
+
+    return titles.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      ""
+    );
+  };
+
+  const recommendedList = () => {
+    return (
+      <div>
+        {recommendations.map((rec, index) => (
+          <Container key={index}>
+            <StyledButton
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              {getQuestionTitleByTestNumber(rec.testNumber)}
+            </StyledButton>
+            {isHovering && (
+              <PreviewBox
+                style={{
+                  left: `${hoverPos.x + 10}px`,
+                  top: `${hoverPos.y + 10}px`,
+                }}
+              >
+                {rec.question + "\n"}
+
+                {rec.article}
+              </PreviewBox>
+            )}
+          </Container>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <Sidebar>
       <div className=" text-white font-semibold text- whitespace-pre-wrap m-2">
@@ -80,7 +145,8 @@ const RecommendationSidebar: React.FC<RecommendationSidebarProps> = ({
       </div>
 
       <br />
-      {isRecommended ? (
+      {isRecommended ? recommendedList() : <div></div>}
+      {/* {isRecommended ? (
         <Container>
           <StyledButton key={"3"}>고3 12월 모의고사 문제</StyledButton>
           <StyledButton key={"2"}>고2 12월 모의고사 문제</StyledButton>
@@ -90,35 +156,11 @@ const RecommendationSidebar: React.FC<RecommendationSidebarProps> = ({
         </Container>
       ) : (
         //! 추후 수정한 뒤에 사용하기
-        // (
-        //   recommendations.map((rec, index) => (
-        //     <Container key={index}>
-        //       <StyledButton
-        //         onMouseEnter={() => setIsHovering(true)}
-        //         onMouseMove={handleMouseMove}
-        //         onMouseLeave={() => setIsHovering(false)}
-        //       >
-        //         {rec.id + 1}. {rec.question}
-        //       </StyledButton>
-        //       {isHovering && (
-        //         <PreviewBox
-        //           style={{
-        //             left: `${hoverPos.x + 10}px`,
-        //             top: `${hoverPos.y + 10}px`,
-        //           }}
-        //         >
-        //           {rec.question + "\n"}
-
-        //           {rec.article}
-        //         </PreviewBox>
-        //       )}
-        //     </Container>
-        //   ))
-        // )
+        
         <div className="m-4 text-white font-bold whitespace-pre-wrap">
           {"문제를 풀면\n비슷한 유형의 문제가 추천됩니다."}
         </div>
-      )}
+      )} */}
     </Sidebar>
   );
 };

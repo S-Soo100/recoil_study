@@ -5,7 +5,7 @@ import { setBaseUrls } from "./html";
 const BASE_URL = process.env.NEXT_PUBLIC_AITUTOR_BACKEND_PRODUCT_SERVER;
 
 type IProps = {
-  questionType: number;
+  questionType: string;
   solvedQuestions: string;
   length: number;
   testType: number;

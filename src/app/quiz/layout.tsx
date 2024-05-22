@@ -131,7 +131,15 @@ export default function useLayout({
         )}
 
         {getPageCircle()}
-        <NextButton onClick={goToNextQuiz}>다음 문제</NextButton>
+        {params!.type === "4" ? (
+          <>
+            <NextButton onClick={goToNextQuiz}>{"결과 보기"}</NextButton>
+          </>
+        ) : (
+          <>
+            <NextButton onClick={goToNextQuiz}>{"다음 문제"}</NextButton>
+          </>
+        )}
       </section>
       <div className="">{children}</div>
     </>

@@ -57,7 +57,8 @@ type Props = {
   isCorrect: boolean | null;
   question: Question | null;
   choiceAnswer: (val: number) => void;
-  resetChoice: () => void;
+  recommendedQuestions: Question[] | null;
+  // resetChoice: () => void;
 };
 
 export default function ViewQuestionPage({
@@ -67,52 +68,9 @@ export default function ViewQuestionPage({
   isCorrect,
   question,
   choiceAnswer,
-  resetChoice,
+  recommendedQuestions,
 }: Props) {
   const router = useRouter();
-  if (question === null || question === undefined || !question.options) {
-    return (
-      <>
-        <div id="loading skeletons">
-          <FloatAnswer
-            style={{
-              color: isCorrect ? "chartreuse" : "red",
-            }}
-          >
-            {isSelected ? (isCorrect ? "정답" : "오답") : ""}
-          </FloatAnswer>
-          <QuestionContainer>
-            <MainContent>
-              <div className=""></div>
-              <QuestionDisplay
-                question={"loading..."}
-                article={"loading...\n\n\n\n\n\n\n\n\n\n\n"}
-              />
-              <div id="loading_choiceDisplay">
-                <OptionDisplay
-                  options={[
-                    "loading...",
-                    "loading...",
-                    "loading...",
-                    "loading...",
-                    "loading...",
-                  ]}
-                  selectedChoice={6}
-                  handleClick={() => {}}
-                />
-              </div>
-              <ResetButton onClick={resetChoice}>reset</ResetButton>
-            </MainContent>
-            <RecommendationSidebar
-              isRecommended={false}
-              recommendations={[demo1, demo1]}
-            />
-          </QuestionContainer>
-        </div>
-        <Loader loading={true} size="60" />
-      </>
-    );
-  }
 
   const getOptions = (data: string) => {
     return data.split("\n");
@@ -122,6 +80,14 @@ export default function ViewQuestionPage({
     return data.split("|");
   };
 
+  //데이터가 없을 때
+  if (question === null || question === undefined || !question.options) {
+    return (
+      <>
+        <SkeletonComponent />
+      </>
+    );
+  }
   return (
     <>
       <div id="main_quiz">
@@ -153,7 +119,7 @@ export default function ViewQuestionPage({
           </MainContent>
           <RecommendationSidebar
             isRecommended={isSelected}
-            recommendations={[demo1, demo1]}
+            recommendations={recommendedQuestions ?? []}
           />
         </QuestionContainer>
       </div>
@@ -161,3 +127,42 @@ export default function ViewQuestionPage({
     </>
   );
 }
+const SkeletonComponent = () => {
+  return (
+    <>
+      <div id="loading skeletons">
+        <FloatAnswer
+          style={{
+            color: "chartreuse",
+          }}
+        >
+          "정답"
+        </FloatAnswer>
+        <QuestionContainer>
+          <MainContent>
+            <div className=""></div>
+            <QuestionDisplay
+              question={"loading..."}
+              article={"loading...\n\n\n\n\n\n\n\n\n\n\n"}
+            />
+            <div id="loading_choiceDisplay">
+              <OptionDisplay
+                options={[
+                  "loading...",
+                  "loading...",
+                  "loading...",
+                  "loading...",
+                  "loading...",
+                ]}
+                selectedChoice={6}
+                handleClick={() => {}}
+              />
+            </div>
+          </MainContent>
+          <RecommendationSidebar isRecommended={false} recommendations={[]} />
+        </QuestionContainer>
+      </div>
+      <Loader loading={true} size="60" />
+    </>
+  );
+};

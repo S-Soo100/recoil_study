@@ -2,12 +2,12 @@ import { getRecommendQuestion } from "@/apis/getRecommendQuestions";
 import { Question } from "@/type/Question";
 
 type IProps = {
-  type: number;
-  currentQuestion: Question[];
-  setAtom: (key: string, val: Question[]) => void;
+  type: string;
+  currentQuestion: number[];
+  setAtom: (val: Question[]) => void;
 };
 
-const getAtomKey = (num: number): string => {
+const getAtomKeyByNumber = (num: number): string => {
   switch (num) {
     case 0:
       return "recommend1Atom";
@@ -27,23 +27,35 @@ export const setRecommendQuestionByNumber = async ({
   currentQuestion,
   setAtom,
 }: IProps) => {
-  const testTypeArr = [1, 2, 3, 4];
-  console.log("get Recommend question");
+  // const testTypeArr = [1, 2, 3, 4];
+  console.log("get Recommend question" + " type " + type);
   const newAtom: Question[] = [];
 
-  for (const i of testTypeArr) {
-    const res: Question[] | null = await getRecommendQuestion({
-      questionType: type,
-      solvedQuestions: `[${currentQuestion}]`,
-      length: 1,
-      testType: i,
-    });
-    console.log(`[${currentQuestion}]`);
-    console.log(i + "번째 호출");
-    if (res) {
-      newAtom.push(res[0]);
+  const res: Question[] | null = await getRecommendQuestion({
+    questionType: type,
+    solvedQuestions: `[${currentQuestion}]`,
+    length: 4,
+    testType: 1,
+  });
+  if (res !== null) {
+    for (const i of res) {
+      newAtom.push(i);
     }
   }
+
+  // for (const i of testTypeArr) {
+  //   const res: Question[] | null = await getRecommendQuestion({
+  //     questionType: type,
+  //     solvedQuestions: `[${currentQuestion}]`,
+  //     length: 1,
+  //     testType: i,
+  //   });
+  //   console.log(`[${currentQuestion}]`);
+  //   console.log(i + "번째 호출");
+  //   if (res) {
+  //     newAtom.push(res[0]);
+  //   }
+  // }
   console.log(newAtom);
-  setAtom(getAtomKey(type), newAtom);
+  setAtom(newAtom);
 };
