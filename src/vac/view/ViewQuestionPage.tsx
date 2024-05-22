@@ -8,7 +8,7 @@ import FeedbackDisplay from "./(quiz)/FeedbackDisplay";
 import { demo1 } from "@/demo/demo";
 import { Question } from "@/type/Question";
 import Loader from "./Loader";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 const QuestionContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.02);
@@ -70,6 +70,7 @@ export default function ViewQuestionPage({
   choiceAnswer,
   recommendedQuestions,
 }: Props) {
+  const params: { type: string } | null = useParams();
   const router = useRouter();
 
   const getOptions = (data: string) => {
@@ -78,6 +79,11 @@ export default function ViewQuestionPage({
 
   const getKeywords = (data: string) => {
     return data.split("|");
+  };
+
+  const onRecommendedClick = (id: number) => {
+    //! 여기에 추천된 문제로 이동하는 페이지 이동 추가
+    router.push(`/recommend/${params!.type}/${id}`);
   };
 
   //데이터가 없을 때
@@ -120,6 +126,9 @@ export default function ViewQuestionPage({
           <RecommendationSidebar
             isRecommended={isSelected}
             recommendations={recommendedQuestions ?? []}
+            onClick={(number) => {
+              onRecommendedClick(number);
+            }}
           />
         </QuestionContainer>
       </div>
@@ -159,7 +168,13 @@ const SkeletonComponent = () => {
               />
             </div>
           </MainContent>
-          <RecommendationSidebar isRecommended={false} recommendations={[]} />
+          <RecommendationSidebar
+            isRecommended={false}
+            recommendations={[]}
+            onClick={(number) => {
+              alert(number + "onclick");
+            }}
+          />
         </QuestionContainer>
       </div>
       <Loader loading={true} size="60" />

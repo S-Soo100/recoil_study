@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { MouseEventHandler, useState } from "react";
 import styled from "@emotion/styled";
 import { Question } from "@/type/Question";
 
@@ -55,11 +55,14 @@ const PreviewBox = styled.div`
 interface RecommendationSidebarProps {
   isRecommended: boolean;
   recommendations: Array<Question>;
+  // onClick: (number: number) => MouseEventHandler<HTMLButtonElement> | undefined;
+  onClick: (number: number) => void;
 }
 
 const RecommendationSidebar: React.FC<RecommendationSidebarProps> = ({
   isRecommended,
   recommendations,
+  onClick,
 }) => {
   const [hoverPos, setHoverPos] = useState<HoverPosition>({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState<boolean>(false);
@@ -117,6 +120,7 @@ const RecommendationSidebar: React.FC<RecommendationSidebarProps> = ({
               onMouseEnter={() => setIsHovering(true)}
               onMouseMove={handleMouseMove}
               onMouseLeave={() => setIsHovering(false)}
+              onClick={() => onClick(rec.id)}
             >
               {getQuestionTitleByTestNumber(rec.testNumber)}
             </StyledButton>
