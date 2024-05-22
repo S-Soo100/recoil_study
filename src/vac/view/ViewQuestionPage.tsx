@@ -145,7 +145,7 @@ const SkeletonComponent = () => {
             color: "chartreuse",
           }}
         >
-          "정답"
+          {"정답"}
         </FloatAnswer>
         <QuestionContainer>
           <MainContent>
