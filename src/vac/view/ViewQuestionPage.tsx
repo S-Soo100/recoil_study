@@ -83,6 +83,26 @@ export default function ViewQuestionPage({
     router.push(`/recommend/${params!.type}/${id}`);
   };
 
+  const goToNextQuiz = () => {
+    switch (params!.type) {
+      case "1":
+        router.push("/quiz/2");
+        return;
+      case "2":
+        router.push("/quiz/3");
+        return;
+      case "3":
+        router.push("/quiz/4");
+        return;
+      case "4":
+        router.push("/result");
+        return;
+      default:
+        router.push("/result");
+        return;
+    }
+  };
+
   //데이터가 없을 때
   if (question === null || question === undefined || !question.options) {
     return (
@@ -110,7 +130,9 @@ export default function ViewQuestionPage({
             <OptionDisplay
               options={getAnswerOptions(question.options)}
               selectedChoice={selectedAnswer ?? 6}
+              isSelected={isSelected}
               handleClick={choiceAnswer}
+              handleNextQuestion={goToNextQuiz}
             />
             <FeedbackDisplay
               answer={question.answer}
@@ -170,8 +192,10 @@ const SkeletonComponent = () => {
                   "loading...",
                   "loading...",
                 ]}
+                isSelected={false}
                 selectedChoice={6}
                 handleClick={() => {}}
+                handleNextQuestion={() => {}}
               />
             </div>
           </MainContent>

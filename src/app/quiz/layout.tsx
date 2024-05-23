@@ -114,7 +114,11 @@ export default function useLayout({
   };
   return (
     <div className="bg-white max-w-[1600px] mx-auto ">
-      <section className="p-1 flex-row bg-#DBDDD0 text-white flex items-center justify-between border-b-slate-300">
+      <section className="flex justify-center mx-auto pt-8 pb-4">
+        {" "}
+        {getPageCircle()}
+      </section>
+      {/* <section className="p-1 flex-row bg-#DBDDD0 text-white flex items-center justify-between border-b-slate-300">
         {params!.type === "1" ? (
           <>
             <HomeButton onClick={goToPrevQuiz} />
@@ -137,7 +141,7 @@ export default function useLayout({
             <NextButton onClick={goToNextQuiz}>{"다음 문제"}</NextButton>
           </>
         )}
-      </section>
+      </section> */}
       {/* <div className="flex w-[100%] px-[5%] mx-auto"> */}
       <div>{children}</div>
       {/* </div> */}

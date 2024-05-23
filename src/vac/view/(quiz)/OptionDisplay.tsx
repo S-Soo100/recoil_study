@@ -3,7 +3,9 @@ import styled from "@emotion/styled";
 type IProps = {
   options: string[];
   selectedChoice: number;
+  isSelected: boolean;
   handleClick: (content: string, index: number) => void;
+  handleNextQuestion: () => void;
 };
 
 const AnswerContainer = styled.div`
@@ -35,8 +37,32 @@ const Option = styled.button<OptionProps>`
 const OptionDisplay = ({
   options: answers,
   selectedChoice,
+  isSelected,
   handleClick,
+  handleNextQuestion,
 }: IProps) => {
+  if (isSelected) {
+    return (
+      <AnswerContainer>
+        <Option
+          key={"selected"}
+          onClick={() => {}}
+          selected={true}
+        >{`${answers[selectedChoice]}`}</Option>
+        <div className="ml-4 text-sky-600">
+          {"선택 완료! 다음으로 넘어가주세요!"}
+        </div>
+        <div className="flex flex-row justify-end ">
+          <button
+            className="m-2 p-2 bg-blue-600 text-white text-lg rounded-md"
+            onClick={handleNextQuestion}
+          >
+            {"다음 문제 ➡️"}
+          </button>
+        </div>
+      </AnswerContainer>
+    );
+  }
   return (
     <AnswerContainer>
       {answers.map((answer, index) => {
