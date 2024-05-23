@@ -33,7 +33,23 @@ export default function ReviewPage() {
   }, [router]);
 
   if (question === null) {
-    return <div>loading</div>;
+    return (
+      <div>
+        <ViewReviewPage
+          isLoading={true}
+          isSelected={false}
+          selectedAnswer={6}
+          isCorrect={false}
+          question={null}
+          choiceAnswer={() => {}}
+          recommendedQuestions={[]}
+          selectedContent={""}
+          isModalOpen={false}
+          handleYes={() => {}}
+          closeModal={() => {}}
+        />
+      </div>
+    );
   }
 
   return (
