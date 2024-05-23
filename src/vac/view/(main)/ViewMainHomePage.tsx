@@ -84,8 +84,9 @@ export default function ViewMainHomePage() {
       <section className="bg-white min-h-[80dvh] flex lg:flex-row flex-col lg:gap-x-12 ">
         <div className="lg:w-1/2 flex justify-center flex-col gap-8 items-start pl-[10dvh] min-h-[50dvh] pr-2 ">
           <div>
+            <h1 className="text-3xl lg:text-6xl font-semibold ">나만을 위한</h1>
             <h1 className="text-3xl lg:text-6xl font-semibold ">
-              나만을 위한 Ai 영어 튜터
+              Ai 영어 튜터
             </h1>
           </div>
           <div className="flex flex-col">
