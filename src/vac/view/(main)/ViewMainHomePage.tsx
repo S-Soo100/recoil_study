@@ -77,25 +77,21 @@ export default function ViewMainHomePage() {
           <Icon width={160} />
         </div>
         <div className="gap-3 flex-row flex">
-          <p>팀 구성</p>
-          <p>팀 구성</p>
-          <p>팀 구성</p>
+          <p>더 알아보기</p>
           <p>팀 구성</p>
         </div>
       </section>
       <section className="bg-white min-h-[80dvh] flex lg:flex-row flex-col lg:gap-x-12 ">
         <div className="lg:w-1/2 flex justify-center flex-col gap-8 items-start pl-[10dvh] min-h-[50dvh] pr-2 ">
           <div>
-            <h1 className="text-3xl lg:text-6xl font-semibold ">Ai로 하는</h1>
             <h1 className="text-3xl lg:text-6xl font-semibold ">
-              수능영어 공부
+              나만을 위한 Ai 영어 튜터
             </h1>
           </div>
-          <p className="">
-            Unlock your potential with our comprehensive English study program.
-            Designed for high school students, we offer a wealth of resources to
-            help you excel in the language.
-          </p>
+          <div className="flex flex-col">
+            <p className="">나의 풀이기록 기반 학습 포인트 체크</p>
+            <p className="">문제유형별, 주제별 추천 문제 제공</p>
+          </div>
           <button
             className="bg-blue-500 rounded-full m-2 px-8 py-2 text-white font-semibold text-lg"
             onClick={() => openModal()}
