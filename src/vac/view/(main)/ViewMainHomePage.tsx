@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import profilePic from "../../../../public/profile.png";
-import vercelIcon from "../../../../public/vercel.svg";
+import profilePic from "../../../../public/ai-tutor-character.png";
 import Modal from "./(modal)/Modal";
 import Icon from "@/icons/Icon";
 import { useRouter } from "next/navigation";
@@ -42,9 +41,9 @@ export default function ViewMainHomePage() {
           setLoading(false);
           closeModal();
           router.push("/quiz/1");
-        }, 2000);
+        }, 500);
       }
-    }, 2000);
+    }, 1500);
   };
 
   const handleLogin = async (email: string, password: string) => {
@@ -69,14 +68,13 @@ export default function ViewMainHomePage() {
   };
 
   return (
-    <main className="bg-white pt-12">
+    <main className="bg-white pt-12 max-w-[1400px] mx-auto h-[100dvh]">
       <section
         id="AppBar"
-        className="px-4 shadow-md w-[92%] bg-white mx-8 mb-8 h-[50px] rounded-full justify-between items-center flex flex-row"
+        className="px-4 shadow-md w-[92%] bg-white mb-8 h-[50px] rounded-full justify-between items-center flex flex-row mx-auto"
       >
         <div className="flex flex-row justify-center items-center">
-          <Icon />
-          <p>Ai Tutor</p>
+          <Icon width={160} />
         </div>
         <div className="gap-3 flex-row flex">
           <p>팀 구성</p>

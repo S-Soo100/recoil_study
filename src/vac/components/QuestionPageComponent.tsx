@@ -14,20 +14,30 @@ import {
   recommend3Atom,
   recommend4Atom,
 } from "@/recoil/recommend-atom";
+import { storedQuestionAtom } from "@/recoil/stored-question-atom";
 
 export default function QuestionPageComponent() {
   const params: { type: string } | null = useParams();
   const atom = useRecoilValue(questionAtom);
+  const [storedQuestion, setStoredQuestion] =
+    useRecoilState(storedQuestionAtom);
   const [loading, setLoading] = useState<boolean>(false);
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number>(6);
+  const [selectedContent, setSelectedContent] = useState<string>("");
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [question, setQuestion] = useState<Question | null>(null);
-  const [answerRate, setAnswerRateAtom] = useRecoilState(answerRateAtom);
   const [recommend1, setRecommend1Atom] = useRecoilState(recommend1Atom);
   const [recommend2, setRecommend2Atom] = useRecoilState(recommend2Atom);
   const [recommend3, setRecommend3Atom] = useRecoilState(recommend3Atom);
   const [recommend4, setRecommend4Atom] = useRecoilState(recommend4Atom);
+  const [stayTime, setStayTime] = useState(0);
+
+  //! 나중에 밖으로 빼야 할 부분
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+  //! 나중에 밖으로 빼야 할 부분
 
   const getAtomsByNumber = (type: string) => {
     switch (type) {
@@ -58,37 +68,64 @@ export default function QuestionPageComponent() {
     }
   };
 
-  const choiceAnswer = (index: number) => {
-    if (!isSelected) {
-      setLoading(true);
-      setRecommendQuestionByNumber({
-        type: params?.type ?? "1",
-        currentQuestion: [question!.id],
-        // currentQuestion: [...atom.map((e) => e.id)],
-        setAtom: getAtomSetterByNumber(params?.type ?? "1"),
-      });
-      setTimeout(() => {
-        setIsSelected(true);
-
-        setSelectedAnswer(index);
-
-        if (index + 1! === question?.answer) {
-          setIsCorrect(true);
-          setAnswerRateAtom([...answerRate, true]);
-        } else {
-          setIsCorrect(false);
-          setAnswerRateAtom([...answerRate, false]);
-        }
-        setLoading(false);
-      }, 300);
-    }
+  const choiceAnswer = (content: string, index: number) => {
+    resetChoice();
+    setSelectedAnswer(index);
+    setSelectedContent(content);
+    openModal();
   };
 
-  // const resetChoice = () => {
-  //   setIsSelected(false);
-  //   setSelectedAnswer(6);
-  //   setIsCorrect(null);
-  // };
+  const handleYes = () => {
+    closeModal();
+    // if (!isSelected) {
+    //   setLoading(true);
+    // setRecommendQuestionByNumber({
+    //   type: params?.type ?? "1",
+    //   currentQuestion: [question!.id],
+    //   // currentQuestion: [...atom.map((e) => e.id)],
+    //   setAtom: getAtomSetterByNumber(params?.type ?? "1"),
+    // });
+    setIsSelected(false);
+    setTimeout(() => {
+      setIsSelected(true);
+      if (selectedAnswer + 1! === question?.answer) {
+        setStoredQuestion([
+          ...storedQuestion,
+          {
+            ...question,
+            selectedAnswer: selectedAnswer,
+            spentTimeSec: stayTime,
+            isCorrected: true,
+          },
+        ]);
+        console.log(stayTime + " seconds");
+      } else if (question !== null) {
+        setStoredQuestion([
+          ...storedQuestion,
+          {
+            ...question,
+            selectedAnswer: selectedAnswer,
+            spentTimeSec: stayTime,
+            isCorrected: false,
+          },
+        ]);
+        console.log(stayTime + " seconds");
+      }
+      setLoading(false);
+    }, 200);
+    // }
+  };
+
+  const modalClose = () => {
+    closeModal();
+    resetChoice();
+  };
+
+  const resetChoice = () => {
+    setIsSelected(false);
+    setSelectedAnswer(6);
+    setIsCorrect(null);
+  };
 
   const router = useRouter();
   useEffect(() => {
@@ -107,15 +144,32 @@ export default function QuestionPageComponent() {
     }, 500);
   }, [atom, params?.type]);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (!isSelected) {
+        setStayTime((prevTime) => prevTime + 1);
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+      // console.log(`Stay time: ${stayTime} seconds`);
+    };
+  }, [stayTime, isSelected]);
+
   return (
     <ViewQuestionPage
       isLoading={loading}
       isSelected={isSelected}
       selectedAnswer={selectedAnswer}
+      selectedContent={selectedContent}
       isCorrect={isCorrect}
       question={question}
       choiceAnswer={choiceAnswer}
       recommendedQuestions={getAtomsByNumber(params?.type ?? "1")}
+      isModalOpen={isModalOpen}
+      handleYes={handleYes}
+      closeModal={modalClose}
       // resetChoice={resetChoice}
     />
   );

@@ -2,8 +2,6 @@
 import styled from "@emotion/styled";
 import React from "react";
 import { useParams, useRouter } from "next/navigation";
-import { questionAtom } from "@/recoil/question-atom";
-import { useRecoilState } from "recoil";
 import HomeButton from "@/vac/view/(result)/HomeButton";
 
 export default function useLayout({
@@ -11,8 +9,6 @@ export default function useLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [atom, setAtom] = useRecoilState(questionAtom);
-
   const NextButton = styled.button`
     padding: 10px;
     margin: 5px 0;
@@ -77,6 +73,7 @@ export default function useLayout({
         );
     }
   };
+
   const goToPrevQuiz = () => {
     switch (params!.type) {
       case "1":
@@ -116,8 +113,8 @@ export default function useLayout({
     }
   };
   return (
-    <>
-      <section className="p-1 flex-row bg-#DBDDD0 text-white flex items-center justify-between border-b-slate-300 shadow-md">
+    <div className="bg-white max-w-[1600px] mx-auto ">
+      <section className="p-1 flex-row bg-#DBDDD0 text-white flex items-center justify-between border-b-slate-300">
         {params!.type === "1" ? (
           <>
             <HomeButton onClick={goToPrevQuiz} />
@@ -141,7 +138,9 @@ export default function useLayout({
           </>
         )}
       </section>
-      <div className="">{children}</div>
-    </>
+      {/* <div className="flex w-[100%] px-[5%] mx-auto"> */}
+      <div>{children}</div>
+      {/* </div> */}
+    </div>
   );
 }

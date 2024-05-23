@@ -46,7 +46,7 @@ export default function RecommendPage() {
     return getAtomsByNumber(params?.type ?? "1").find((e) => e.id === idNum);
   };
 
-  const choiceAnswer = (index: number) => {
+  const choiceAnswer = (content: string, index: number) => {
     if (!isSelected) {
       setLoading(true);
       // setRecommendQuestionByNumber({
@@ -74,7 +74,7 @@ export default function RecommendPage() {
 
   useEffect(() => {
     setQuestion(getQuestionById(params!.id)!);
-  }, [getQuestionById, params]);
+  }, [params]);
 
   return (
     <div>
@@ -86,7 +86,10 @@ export default function RecommendPage() {
         question={question}
         choiceAnswer={choiceAnswer}
         recommendedQuestions={[]}
-        // resetChoice={resetChoice}
+        selectedContent={""}
+        isModalOpen={false}
+        handleYes={() => {}}
+        closeModal={() => {}}
       />
     </div>
   );

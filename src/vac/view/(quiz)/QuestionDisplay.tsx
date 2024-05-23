@@ -5,8 +5,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
-  position: relative;
-  top: -100px;
+  // position: relative;
+  // top: -100px;
 `;
 
 const QuestionBox = styled.div`
@@ -24,7 +24,7 @@ const ArticleBox = styled.div`
   border-top: 0.5px solid #d3d3d3;
   border-bottom: 0.5px solid #d3d3d3;
   // border-radius: 10px;
-  background: #ffffff;
+  background: #fafafa;
   padding: 20px;
   margin: 12px 2px;
   // box-shadow: 0 3px 1px rgba(0, 0, 0, 0.07), 0 -11px 3px rgba(0, 0, 0, 0.08);
