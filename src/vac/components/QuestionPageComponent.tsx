@@ -17,6 +17,7 @@ import {
 import { storedQuestionAtom } from "@/recoil/stored-question-atom";
 
 export default function QuestionPageComponent() {
+  const router = useRouter();
   const params: { type: string } | null = useParams();
   const atom = useRecoilValue(questionAtom);
   const [storedQuestion, setStoredQuestion] =
@@ -127,7 +128,6 @@ export default function QuestionPageComponent() {
     setIsCorrect(null);
   };
 
-  const router = useRouter();
   useEffect(() => {
     setLoading(true);
 
@@ -156,6 +156,19 @@ export default function QuestionPageComponent() {
       // console.log(`Stay time: ${stayTime} seconds`);
     };
   }, [stayTime, isSelected]);
+
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      // 사용자가 뒤로가기를 누르면 원하는 경로로 리다이렉트
+      router.back();
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [router]);
 
   return (
     <ViewQuestionPage

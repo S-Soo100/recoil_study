@@ -9,6 +9,7 @@ import {
   storedQuestionAtom,
   storedQuestionSelector,
 } from "@/recoil/stored-question-atom";
+import { StoredQuestion } from "@/type/StoredQuestion";
 
 const ResultPageComponent = () => {
   const [loading, setLoading] = useState(false);
@@ -36,6 +37,7 @@ const ResultPageComponent = () => {
     }, 2000);
     router.push("/");
   };
+
   const goToRetry = () => {
     setLoading(true);
     setStored([]);
@@ -44,6 +46,7 @@ const ResultPageComponent = () => {
       router.push("/quiz/1");
     }, 1000);
   };
+
   const goToNewQuiz = () => {
     setLoading(true);
     // 새로운 문제 목록을 서버로 요청
@@ -57,6 +60,10 @@ const ResultPageComponent = () => {
     }, 2000);
   };
 
+  const showDetails = (id: number) => {
+    router.push(`/review/${id}`);
+  };
+
   return (
     <ViewResultPage
       totalCount={statistics.totalCount}
@@ -64,6 +71,7 @@ const ResultPageComponent = () => {
       storedQuestions={stored}
       incorrectQuestions={statistics.incorrectQuestions}
       stayTime={statistics.totalTimeSec}
+      showDetails={showDetails}
       {...props}
     />
   );
