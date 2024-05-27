@@ -15,6 +15,7 @@ export default function Error() {
     <div className="w-[100dvw] h-[100dvh] flex flex-col items-center justify-center gap-8 text-2xl">
       <h2 className="m-12 ">Something went wrong!</h2>
       <button
+        className="m-4 bg-slate-300 border-2 border-black justify-center text-center "
         onClick={
           // Attempt to recover by trying to re-render the segment
           () => goToHomePage()
