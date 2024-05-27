@@ -13,7 +13,7 @@ export default function useLayout({
     padding: 10px;
     margin: 5px 0;
     text-align: start;
-    border-radius: 0.75rem; /* 12px */
+    border-radius: 0.25rem;
     // background: #447799;
     background: #4e514e;
     cursor: pointer;
@@ -77,7 +77,7 @@ export default function useLayout({
   const goToPrevQuiz = () => {
     const typeNumber = parseInt(params!.type[0]);
 
-    if (params!.type[0] === "1") {
+    if (params!.type[0] === "1" && params!.type.length === 1) {
       router.push("/");
       return;
     }
@@ -95,8 +95,8 @@ export default function useLayout({
     router.push(`/quiz/${typeNumber + 1}`);
   };
   return (
-    <div className="bg-white max-w-[1600px] mx-auto ">
-      <section className="flex justify-between items-center text-white mx-auto pt-8 pb-4">
+    <div className="bg-white max-w-[1000px] mx-auto ">
+      <section className="flex justify-between items-center text-white mx-4 pt-4 pb-4">
         {params!.type === "1" ? (
           <>
             <HomeButton onClick={goToPrevQuiz} />
@@ -108,8 +108,10 @@ export default function useLayout({
             </NextButton>
           </>
         )}
-        <div className="text-black">{`${params!.type}/10`}</div>
-        {params!.type === "4" ? (
+        <div className="text-black text-lg font-light">{`${
+          params!.type
+        }/10`}</div>
+        {params!.type[0] === "1" && params!.type[1] === "0" ? (
           <>
             <NextButton onClick={goToNextQuiz}>{"결과 보기"}</NextButton>
           </>
@@ -119,33 +121,7 @@ export default function useLayout({
           </>
         )}
       </section>
-      {/* <section className="p-1 flex-row bg-#DBDDD0 text-white flex items-center justify-between border-b-slate-300">
-        {params!.type === "1" ? (
-          <>
-            <HomeButton onClick={goToPrevQuiz} />
-          </>
-        ) : (
-          <>
-            <NextButton onClick={goToPrevQuiz}>
-              {params!.type !== "1" ? "이전 문제" : "뒤로 가기"}
-            </NextButton>
-          </>
-        )}
-
-        {getPageCircle()}
-        {params!.type === "4" ? (
-          <>
-            <NextButton onClick={goToNextQuiz}>{"결과 보기"}</NextButton>
-          </>
-        ) : (
-          <>
-            <NextButton onClick={goToNextQuiz}>{"다음 문제"}</NextButton>
-          </>
-        )}
-      </section> */}
-      {/* <div className="flex w-[100%] px-[5%] mx-auto"> */}
       <div>{children}</div>
-      {/* </div> */}
     </div>
   );
 }

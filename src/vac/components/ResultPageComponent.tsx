@@ -53,7 +53,7 @@ const ResultPageComponent = () => {
     sessionStorage.removeItem("mainQuestion");
     setRecoilMainQuestion([]);
     setStored([]);
-    initMainQuestion({ setAtom: setRecoilMainQuestion });
+    initMainQuestion({ setStoredAtom: setStored });
     const timer = setTimeout(() => {
       setLoading(false);
       router.push("/quiz/1");

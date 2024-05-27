@@ -15,11 +15,15 @@ import {
   recommend4Atom,
 } from "@/recoil/recommend-atom";
 import { storedQuestionAtom } from "@/recoil/stored-question-atom";
+import { goToNextQuiz } from "@/utils/goToNextQuiz";
+import { useUpdateStoredQuestions } from "@/service/updateStoredQuestion";
+import { StoredQuestion } from "@/type/StoredQuestion";
 
 export default function QuestionPageComponent() {
+  const updateStoredQuestions = useUpdateStoredQuestions();
   const router = useRouter();
   const params: { type: string } | null = useParams();
-  const atom = useRecoilValue(questionAtom);
+  // const atom = useRecoilValue(questionAtom);
   const [storedQuestion, setStoredQuestion] =
     useRecoilState(storedQuestionAtom);
   const [loading, setLoading] = useState<boolean>(false);
@@ -27,149 +31,114 @@ export default function QuestionPageComponent() {
   const [selectedAnswer, setSelectedAnswer] = useState<number>(6);
   const [selectedContent, setSelectedContent] = useState<string>("");
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const [question, setQuestion] = useState<Question | null>(null);
-  const [recommend1, setRecommend1Atom] = useRecoilState(recommend1Atom);
-  const [recommend2, setRecommend2Atom] = useRecoilState(recommend2Atom);
-  const [recommend3, setRecommend3Atom] = useRecoilState(recommend3Atom);
-  const [recommend4, setRecommend4Atom] = useRecoilState(recommend4Atom);
+  const [question, setQuestion] = useState<StoredQuestion | null>(null);
   const [stayTime, setStayTime] = useState(0);
 
-  //! 나중에 밖으로 빼야 할 부분
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-  //! 나중에 밖으로 빼야 할 부분
+  const setQuestionAnswer = (index: number) => {
+    const newQuestion: StoredQuestion = {
+      ...question,
+      selectedAnswer: index,
+    } as StoredQuestion;
+    setQuestion(newQuestion);
+  };
 
-  const getAtomsByNumber = (type: string) => {
-    switch (type) {
-      case "1":
-        return recommend1;
-      case "2":
-        return recommend2;
-      case "3":
-        return recommend3;
-      case "4":
-        return recommend4;
-      default:
-        return recommend1;
+  const selectrAnswer = (content: string, index: number) => {
+    setIsSelected(true);
+    setSelectedAnswer((_) => index);
+  };
+
+  const handleSelectAnswer = () => {
+    if (selectedAnswer + 1! === question?.answer) {
+      updateStoredQuestions({
+        ...question,
+        selectedAnswer: selectedAnswer,
+        spentTimeSec: stayTime,
+        isCorrected: true,
+      });
+      console.log("update");
+      console.log({
+        ...question,
+        selectedAnswer: selectedAnswer,
+        spentTimeSec: stayTime,
+        isCorrected: true,
+      });
+    } else if (question !== null) {
+      updateStoredQuestions({
+        ...question,
+        selectedAnswer: selectedAnswer,
+        spentTimeSec: stayTime,
+        isCorrected: false,
+      });
     }
-  };
-  const getAtomSetterByNumber = (type: string) => {
-    switch (type) {
-      case "1":
-        return setRecommend1Atom;
-      case "2":
-        return setRecommend2Atom;
-      case "3":
-        return setRecommend3Atom;
-      case "4":
-        return setRecommend4Atom;
-      default:
-        return setRecommend1Atom;
-    }
-  };
-
-  const choiceAnswer = (content: string, index: number) => {
-    resetChoice();
-    setSelectedAnswer(index);
-    setSelectedContent(content);
-    openModal();
-    handleYes();
-    goToNextQuiz();
-  };
-
-  const handleYes = () => {
-    closeModal();
-    // if (!isSelected) {
-    //   setLoading(true);
-    // setRecommendQuestionByNumber({
-    //   type: params?.type ?? "1",
-    //   currentQuestion: [question!.id],
-    //   // currentQuestion: [...atom.map((e) => e.id)],
-    //   setAtom: getAtomSetterByNumber(params?.type ?? "1"),
-    // });
-    setIsSelected(false);
-    setTimeout(() => {
-      setIsSelected(true);
-      if (selectedAnswer + 1! === question?.answer) {
-        setStoredQuestion([
-          ...storedQuestion,
-          {
-            ...question,
-            selectedAnswer: selectedAnswer,
-            spentTimeSec: stayTime,
-            isCorrected: true,
-          },
-        ]);
-        console.log(stayTime + " seconds");
-      } else if (question !== null) {
-        setStoredQuestion([
-          ...storedQuestion,
-          {
-            ...question,
-            selectedAnswer: selectedAnswer,
-            spentTimeSec: stayTime,
-            isCorrected: false,
-          },
-        ]);
-        console.log(stayTime + " seconds");
-      }
-      setLoading(false);
-    }, 200);
-    // }
   };
 
   const modalClose = () => {
-    closeModal();
-    resetChoice();
+    // closeModal();
+    // resetChoice();
   };
 
-  const resetChoice = () => {
-    setIsSelected(false);
-    setSelectedAnswer(6);
-    setIsCorrect(null);
-  };
+  // const resetChoice = () => {
+  //   setIsSelected(false);
+  //   setSelectedAnswer(6);
+  //   setIsCorrect(null);
+  // };
 
-  const goToNextQuiz = () => {
-    const typeNumber = parseInt(params!.type[0]);
-
-    if (params!.type[0] + params!.type[1] === "10") {
-      router.push(`/result`);
-      return;
-    }
-
-    router.push(`/quiz/${typeNumber + 1}`);
-  };
-
+  // 문제 세팅
   useEffect(() => {
     setLoading(true);
 
-    // if (questions) {
-    setQuestion(atom[parseInt(params?.type ?? "2") - 1]);
-    // }
-
-    if (atom.length < 1) {
-      setQuestion(demo1);
+    setIsSelected(false);
+    if (question === null) {
+      setQuestion(storedQuestion[parseInt(params?.type ?? "2") - 1]);
+      setSelectedAnswer(
+        storedQuestion[parseInt(params?.type ?? "2") - 1].selectedAnswer
+      );
     }
+    // if (storedQuestion.length < 1) {
+    //   setQuestion({
+    //     ...demo1,
+    //     selectedAnswer: 6,
+    //     spentTimeSec: 0,
+    //     isCorrected: false,
+    //   });
+    // }
 
     setTimeout(() => {
       setLoading(false);
     }, 500);
-  }, [atom, params?.type]);
+  }, []);
 
+  //답이 바뀔때마다 하는 동작
+  useEffect(() => {
+    if (selectedAnswer !== 6) {
+      console.log("isSelected Changed" + selectedAnswer);
+      setIsSelected(true);
+      setLoading(true);
+      setQuestionAnswer(selectedAnswer);
+      handleSelectAnswer();
+      setTimeout(() => {
+        setLoading(false);
+        if (isSelected) {
+          goToNextQuiz(params, router);
+        }
+      }, 330);
+    }
+  }, [selectedAnswer]);
+
+  // 문제풀이시간 세팅
   useEffect(() => {
     const intervalId = setInterval(() => {
-      if (!isSelected) {
-        setStayTime((prevTime) => prevTime + 1);
-      }
+      setStayTime((prevTime) => prevTime + 1);
+      console.log(stayTime + " staytime");
     }, 1000);
 
     return () => {
       clearInterval(intervalId);
-      // console.log(`Stay time: ${stayTime} seconds`);
+      console.log(`Stay time: ${stayTime} seconds and cleared`);
     };
   }, [stayTime, isSelected]);
 
+  // 뒤로가기 버튼 동작
   useEffect(() => {
     const handlePopState = (event: PopStateEvent) => {
       // 사용자가 뒤로가기를 누르면 원하는 경로로 리다이렉트
@@ -191,11 +160,11 @@ export default function QuestionPageComponent() {
       selectedContent={selectedContent}
       isCorrect={isCorrect}
       question={question}
-      choiceAnswer={choiceAnswer}
-      recommendedQuestions={getAtomsByNumber(params?.type ?? "1")}
-      isModalOpen={isModalOpen}
-      handleYes={handleYes}
-      closeModal={modalClose}
+      choiceAnswer={selectrAnswer}
+      recommendedQuestions={[]} //! 임시, 사용하지 않음
+      isModalOpen={false} //! 임시, 사용하지 않음
+      handleYes={handleSelectAnswer}
+      closeModal={modalClose} //! 임시, 사용하지 않음
       // resetChoice={resetChoice}
     />
   );

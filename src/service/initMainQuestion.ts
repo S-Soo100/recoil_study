@@ -1,18 +1,18 @@
-import { getQuestion } from "@/apis/getQuestion";
-import { Question } from "@/type/Question";
+import { getStoredQuestion } from "@/apis/getStoredQuestion";
+import { StoredQuestion } from "@/type/StoredQuestion";
 
 type IProps = {
-  setAtom: (val: Question[]) => void;
+  setStoredAtom: (val: StoredQuestion[]) => void;
 };
 
-export const initMainQuestion = async ({ setAtom }: IProps) => {
+export const initMainQuestion = async ({ setStoredAtom }: IProps) => {
   // const ids = [1, 2, 3, 4];
   const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   console.log("init main question");
-  const newAtom: Question[] = [];
+  const newAtom: StoredQuestion[] = [];
 
   for (const id of ids) {
-    const res: Question[] | null = await getQuestion({
+    const res: StoredQuestion[] | null = await getStoredQuestion({
       questionType: id,
       solvedQuestions: `[]`,
       length: 1,
@@ -23,16 +23,5 @@ export const initMainQuestion = async ({ setAtom }: IProps) => {
       newAtom.push(res[0]);
     }
   }
-  // ids.forEach(async (id) => {
-  //   const res = await getQuestion({
-  //     questionType: id,
-  //     solvedQuestions: `[]`,
-  //     length: 1,
-  //     testType: 1,
-  //   });
-  //   console.log(id + "번쨰 호출");
-  //   setAtom(res as Question[]);
-  // });
-  console.log(newAtom);
-  setAtom(newAtom);
+  setStoredAtom(newAtom);
 };

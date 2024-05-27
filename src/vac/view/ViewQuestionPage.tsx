@@ -10,6 +10,7 @@ import { Question } from "@/type/Question";
 import Loader from "./Loader";
 import { useParams, useRouter } from "next/navigation";
 import ChoiceModal from "./(quiz)/ChoiceModal";
+import { goToNextQuiz } from "@/utils/goToNextQuiz";
 
 const QuestionContainer = styled.div`
   // background-color: rgba(0, 0, 0, 0.02);
@@ -83,24 +84,8 @@ export default function ViewQuestionPage({
     router.push(`/recommend/${params!.type}/${id}`);
   };
 
-  const goToNextQuiz = () => {
-    switch (params!.type) {
-      case "1":
-        router.push("/quiz/2");
-        return;
-      case "2":
-        router.push("/quiz/3");
-        return;
-      case "3":
-        router.push("/quiz/4");
-        return;
-      case "4":
-        router.push("/result");
-        return;
-      default:
-        router.push("/result");
-        return;
-    }
+  const nextPage = () => {
+    goToNextQuiz(params, router);
   };
 
   //데이터가 없을 때
@@ -132,7 +117,7 @@ export default function ViewQuestionPage({
               selectedChoice={selectedAnswer ?? 6}
               isSelected={isSelected}
               handleClick={choiceAnswer}
-              handleNextQuestion={goToNextQuiz}
+              handleNextQuestion={nextPage}
             />
             <FeedbackDisplay
               answer={question.answer}

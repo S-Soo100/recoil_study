@@ -96,11 +96,23 @@ const QuestionBox = ({
         <p className="font-semibold text-lg">{index + 1 + " 번 문제"}</p>
         <p
           style={{
-            color: e.isCorrected ? "Dodgerblue" : "red",
+            color: e.isCorrected
+              ? "Dodgerblue"
+              : e.selectedAnswer === 6 ||
+                e.selectedAnswer === undefined ||
+                e.selectedAnswer === null
+              ? "yellow"
+              : "red",
           }}
           className="px-1 bg-gray-900 rounded-sm ml-12"
         >
-          {e.isCorrected ? "정답" : "오답"}
+          {e.isCorrected
+            ? "정답"
+            : e.selectedAnswer === 6 ||
+              e.selectedAnswer === undefined ||
+              e.selectedAnswer === null
+            ? "풀지않음"
+            : "오답"}
         </p>
       </div>
       {/* <div className="overflow-hidden text-ellipsis text-sm h-[50%] w-full">

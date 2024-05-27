@@ -10,8 +10,11 @@ import { initMainQuestion } from "@/service/initMainQuestion";
 import { useRecoilState } from "recoil";
 import Loader from "../Loader";
 import { Question } from "@/type/Question";
+import { useUpdateStoredQuestionsArray } from "@/service/updateStoredQuestion";
+import { StoredQuestion } from "@/type/StoredQuestion";
 
 export default function ViewMainHomePage() {
+  const updateStoredQuestionsArray = useUpdateStoredQuestionsArray();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -20,22 +23,19 @@ export default function ViewMainHomePage() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  function atomSetter(val: Question[]) {
-    const newArray = [...atom, ...val];
-    setAtom(newArray);
+  function atomSetter(val: StoredQuestion[]) {
+    updateStoredQuestionsArray(val);
   }
 
   const goToQustionPage = async () => {
     setLoading(true);
-    initMainQuestion({ setAtom: atomSetter });
+    initMainQuestion({ setStoredAtom: atomSetter });
     const timer = setTimeout(() => {
       setLoading(false);
       if (atom.length > 0) {
-        console.log("fetch complete");
         closeModal();
         router.push("/quiz/1");
       } else {
-        console.log("re fetch");
         setLoading(true);
         const timer = setTimeout(() => {
           setLoading(false);
@@ -49,19 +49,6 @@ export default function ViewMainHomePage() {
   const handleLogin = async (email: string, password: string) => {
     try {
       goToQustionPage();
-      // const response = await fetch("/api/login", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ email, password }),
-      // });
-      // if (!response.ok) {
-      //   throw new Error("Login failed");
-      // }
-      // const data = await response.json();
-      // console.log("Login successful:", data);
-      // // Add your logic here for successful login, like redirecting the user
     } catch (error) {
       return (error as Error).message;
     }
