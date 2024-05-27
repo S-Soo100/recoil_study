@@ -74,6 +74,8 @@ export default function QuestionPageComponent() {
     setSelectedAnswer(index);
     setSelectedContent(content);
     openModal();
+    handleYes();
+    goToNextQuiz();
   };
 
   const handleYes = () => {
@@ -126,6 +128,17 @@ export default function QuestionPageComponent() {
     setIsSelected(false);
     setSelectedAnswer(6);
     setIsCorrect(null);
+  };
+
+  const goToNextQuiz = () => {
+    const typeNumber = parseInt(params!.type[0]);
+
+    if (params!.type[0] + params!.type[1] === "10") {
+      router.push(`/result`);
+      return;
+    }
+
+    router.push(`/quiz/${typeNumber + 1}`);
   };
 
   useEffect(() => {

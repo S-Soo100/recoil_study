@@ -19,9 +19,6 @@ export const getQuestion = async ({
 }: IProps): Promise<Question[] | null> => {
   setBaseUrls();
   // console.log(`getQuestion ${questionType}`);
-  console.log(
-    `${BASE_URL}question/random?questionType=${questionType}&solvedQuestions=${solvedQuestions}&length=${length}&testType=${testType}`
-  );
   const axiosOption: AxiosRequestConfig = {
     url: `${BASE_URL}question/random?questionType=${questionType}&solvedQuestions=${solvedQuestions}&length=${length}&testType=${testType}`,
     method: "GET",

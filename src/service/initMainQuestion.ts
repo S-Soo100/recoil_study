@@ -6,7 +6,8 @@ type IProps = {
 };
 
 export const initMainQuestion = async ({ setAtom }: IProps) => {
-  const ids = [1, 2, 3, 4];
+  // const ids = [1, 2, 3, 4];
+  const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   console.log("init main question");
   const newAtom: Question[] = [];
 

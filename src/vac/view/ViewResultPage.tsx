@@ -92,13 +92,13 @@ const QuestionBox = ({
       className="h-[180px] flex bg-gray-500 p-3 rounded-sm shadow-md text-white flex-col"
       onClick={() => showDetails(e.id)}
     >
-      <div className="flex flex-row justify-between mb-4">
+      <div className="flex flex-row w-full justify-between mb-4">
         <p className="font-semibold text-lg">{index + 1 + " 번 문제"}</p>
         <p
           style={{
             color: e.isCorrected ? "Dodgerblue" : "red",
           }}
-          className="px-1 bg-gray-900 rounded-sm "
+          className="px-1 bg-gray-900 rounded-sm ml-12"
         >
           {e.isCorrected ? "정답" : "오답"}
         </p>

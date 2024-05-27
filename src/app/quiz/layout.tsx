@@ -75,48 +75,49 @@ export default function useLayout({
   };
 
   const goToPrevQuiz = () => {
-    switch (params!.type) {
-      case "1":
-        router.replace("/");
-        return;
-      case "2":
-        router.push(`/quiz/1`);
-        return;
-      case "3":
-        router.push(`/quiz/2`);
-        return;
-      case "4":
-        router.push(`/quiz/3`);
-        return;
-      default:
-        router.push(`/quiz/1`);
-        return;
+    const typeNumber = parseInt(params!.type[0]);
+
+    if (params!.type[0] === "1") {
+      router.push("/");
+      return;
     }
+
+    router.push(`/quiz/${typeNumber - 1}`);
   };
   const goToNextQuiz = () => {
-    switch (params!.type) {
-      case "1":
-        router.push("/quiz/2");
-        return;
-      case "2":
-        router.push("/quiz/3");
-        return;
-      case "3":
-        router.push("/quiz/4");
-        return;
-      case "4":
-        router.push("/result");
-        return;
-      default:
-        router.push("/result");
-        return;
+    const typeNumber = parseInt(params!.type[0]);
+
+    if (params!.type[0] + params!.type[1] === "10") {
+      router.push(`/result`);
+      return;
     }
+
+    router.push(`/quiz/${typeNumber + 1}`);
   };
   return (
     <div className="bg-white max-w-[1600px] mx-auto ">
-      <section className="flex justify-center mx-auto pt-8 pb-4">
-        {" "}
-        {getPageCircle()}
+      <section className="flex justify-between items-center text-white mx-auto pt-8 pb-4">
+        {params!.type === "1" ? (
+          <>
+            <HomeButton onClick={goToPrevQuiz} />
+          </>
+        ) : (
+          <>
+            <NextButton onClick={goToPrevQuiz}>
+              {params!.type !== "1" ? "이전 문제" : "뒤로 가기"}
+            </NextButton>
+          </>
+        )}
+        <div className="text-black">{`${params!.type}/10`}</div>
+        {params!.type === "4" ? (
+          <>
+            <NextButton onClick={goToNextQuiz}>{"결과 보기"}</NextButton>
+          </>
+        ) : (
+          <>
+            <NextButton onClick={goToNextQuiz}>{"다음 문제"}</NextButton>
+          </>
+        )}
       </section>
       {/* <section className="p-1 flex-row bg-#DBDDD0 text-white flex items-center justify-between border-b-slate-300">
         {params!.type === "1" ? (
