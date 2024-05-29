@@ -10,7 +10,7 @@ import { initMainQuestion } from "@/service/initMainQuestion";
 import { useRecoilState } from "recoil";
 import Loader from "../Loader";
 import { Question } from "@/type/Question";
-import { useUpdateStoredQuestionsArray } from "@/service/updateStoredQuestion";
+import { useUpdateStoredQuestionsArray } from "@/hook/useUpdateStoredQuestion";
 import { StoredQuestion } from "@/type/StoredQuestion";
 
 export default function ViewMainHomePage() {
@@ -55,20 +55,21 @@ export default function ViewMainHomePage() {
   };
 
   return (
-    <main className="bg-white pt-12 max-w-[1400px] mx-auto h-[100dvh]">
+    <main className="bg-white pt-12 max-w-[1400px] mx-auto h-[100dvh] ">
       <section
         id="AppBar"
         className="px-4 shadow-md w-[92%] bg-white mb-8 h-[50px] rounded-full justify-between items-center flex flex-row mx-auto"
       >
         <div className="flex flex-row justify-center items-center">
           <Icon width={160} />
+          <div>A Important</div>
         </div>
         <div className="gap-3 flex-row flex">
-          <p>더 알아보기</p>
-          <p>팀 구성</p>
+          <a href="/about">더 알아보기</a>
+          <a href="/team">팀 구성</a>
         </div>
       </section>
-      <section className="bg-white min-h-[80dvh] flex lg:flex-row flex-col lg:gap-x-12 ">
+      <section className="bg-white min-h-[80dvh] flex lg:flex-row flex-col lg:gap-x-12 items-start">
         <div className="lg:w-1/2 flex justify-center flex-col gap-8 items-start pl-[10dvh] min-h-[50dvh] pr-2 ">
           <div>
             <h1 className="text-3xl lg:text-6xl font-semibold ">나만을 위한</h1>

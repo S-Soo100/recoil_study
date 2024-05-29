@@ -1,36 +1,29 @@
 "use client";
-import { questionAtom } from "@/recoil/question-atom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import ViewResultPage from "../view/ViewResultPage";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { initMainQuestion } from "@/service/initMainQuestion";
 import {
   storedQuestionAtom,
   storedQuestionSelector,
 } from "@/recoil/stored-question-atom";
-import { StoredQuestion } from "@/type/StoredQuestion";
 
 const ResultPageComponent = () => {
   const [loading, setLoading] = useState(false);
   const statistics = useRecoilValue(storedQuestionSelector);
   // 내가 푼 문제 목록 및 정답률
   const router = useRouter();
-  const [recoilMainQuestion, setRecoilMainQuestion] =
-    useRecoilState(questionAtom);
   const [stored, setStored] = useRecoilState(storedQuestionAtom);
 
   const props = {
     goToHomePage: () => goToHome(),
-    goToRetry: () => goToRetry(),
-    goToNewQuiz: () => goToNewQuiz(),
+    goToReport: () => goToReport(),
+    goToRecommendQuiz: () => goToRecommendQuiz(),
     loading: loading,
   };
 
   const goToHome = () => {
     setLoading(true);
-    sessionStorage.removeItem("mainQuestion");
-    setRecoilMainQuestion([]);
     setStored([]);
     const timer = setTimeout(() => {
       setLoading(false);
@@ -38,26 +31,22 @@ const ResultPageComponent = () => {
     router.push("/");
   };
 
-  const goToRetry = () => {
+  const goToReport = () => {
     setLoading(true);
-    setStored([]);
     const timer = setTimeout(() => {
       setLoading(false);
-      router.push("/quiz/1");
+      router.push("/report");
     }, 1000);
   };
 
-  const goToNewQuiz = () => {
+  const goToRecommendQuiz = () => {
     setLoading(true);
-    // 새로운 문제 목록을 서버로 요청
-    sessionStorage.removeItem("mainQuestion");
-    setRecoilMainQuestion([]);
-    setStored([]);
-    initMainQuestion({ setStoredAtom: setStored });
+    //todo stored를 넣어서, 틀린놈만 골라서 통신하는 API 짜기
+    //! 추천 문제 서버통힌하는 로직 여기에 써야됨
     const timer = setTimeout(() => {
       setLoading(false);
-      router.push("/quiz/1");
-    }, 2000);
+      // router.push("/어디어디로???");
+    }, 1000);
   };
 
   const showDetails = (id: number) => {

@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import HomeButton from "./(result)/HomeButton";
 import Loader from "./Loader";
 import { StoredQuestion } from "@/type/StoredQuestion";
+import { QuestionBox } from "./(result)/QuestionBox";
 
 interface Props {
   totalCount: number;
@@ -12,9 +13,9 @@ interface Props {
   incorrectQuestions: StoredQuestion[];
   stayTime: number;
   goToHomePage: () => void;
-  goToRetry: () => void;
-  goToNewQuiz: () => void;
   showDetails: (id: number) => void;
+  goToReport: () => void;
+  goToRecommendQuiz: () => void;
 }
 
 const ViewResultPage = ({
@@ -23,11 +24,10 @@ const ViewResultPage = ({
   loading,
   stayTime,
   storedQuestions,
-  incorrectQuestions,
   goToHomePage,
-  goToRetry,
-  goToNewQuiz,
   showDetails,
+  goToReport,
+  goToRecommendQuiz,
 }: Props) => {
   const correctRate = () => ((answerCount / totalCount) * 100).toFixed();
 
@@ -42,19 +42,21 @@ const ViewResultPage = ({
         <div className="px-[2%] pt-[50px] h-[30%] bg-white gap-4 flex flex-col justify-start lg:max-w-[60%] mx-auto">
           <h2 className="text-2xl font-semibold">문제풀이 결과</h2>{" "}
           <span className="inline-grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="h-[180px] justify-center items-center flex bg-gray-500 p-3 rounded-sm shadow-md text-white flex-col">
+            <div className="h-[120px] text-lg justify-center items-center flex bg-gray-100 hover:bg-slate-200 p-3 rounded-sm shadow-md  flex-col">
               <div>총 학습시간</div>
-              <div>{stayTime} 초</div>
+              <p className="font-bold text-2xl">{stayTime} 초</p>
               {/* <div>{stayTime}</div> */}
-            </div>{" "}
-            <div className="h-[180px] justify-center items-center flex bg-gray-500 p-3 rounded-sm shadow-md text-white flex-col">
-              <p>{"정답률 " + correctRate() + "%"}</p>
-              <p>{answerCount + "/" + totalCount + "문제 정답"}</p>
+            </div>
+            <div className="h-[120px] text-lg justify-center items-center flex bg-gray-100 hover:bg-slate-200 p-3 rounded-sm shadow-md  flex-col">
+              <p className="font-bold text-2xl">
+                {answerCount + "/" + totalCount + "문제 정답"}
+              </p>
+              <p className=" ">{"정답률 " + correctRate() + "%"}</p>
             </div>
           </span>
         </div>
 
-        <div className="px-[2%] pt-[50px] bg-white gap-4 flex flex-col justify-start lg:max-w-[60%] mx-auto mb-8 pb-12">
+        <div className="px-[2%] pt-[50px] bg-white gap-4 flex flex-col justify-start lg:max-w-[60%] mx-auto pb-4 ">
           <h2 className="text-2xl font-semibold">문제풀이 점검</h2>
           <span className="inline-grid grid-cols-1 lg:grid-cols-2 gap-4">
             {storedQuestions.map((e, index) => (
@@ -67,6 +69,25 @@ const ViewResultPage = ({
             ))}
           </span>
         </div>
+
+        <div className="px-[2%] pt-[50px] bg-white gap-4 flex flex-col justify-start lg:max-w-[60%] mx-auto mb-8 pb-[300px]">
+          <h2 className="text-2xl font-semibold">AI 분석결과 보기</h2>
+          <div className="grid gap-4 grid-cols-1 lg:grid-cols-3">
+            <button
+              className="h-[120px] bg-gray-100 p-3 rounded-sm shadow-md flex flex-col justify-center text:lg lg:text-xl items-center text-center hover:bg-slate-200"
+              onClick={goToReport}
+            >
+              <p>📊 분석결과 보고서</p>
+            </button>
+            <button
+              className="h-[120px] bg-gray-100 p-3 rounded-sm shadow-md flex flex-col justify-center text:lg lg:text-xl items-center text-center hover:bg-slate-200"
+              onClick={goToRecommendQuiz}
+            >
+              <p> 📝 추천 문제 모의고사</p>
+            </button>
+            {/* <div className="h-[120px] bg-gray-100 p-3 rounded-sm shadow-md flex flex-col justify-center text-2xl text-center hover:bg-slate-200"></div> */}
+          </div>
+        </div>
       </section>
       {loading ? <Loader loading={loading} /> : <div></div>}
     </>
@@ -74,53 +95,3 @@ const ViewResultPage = ({
 };
 
 export default ViewResultPage;
-
-const QuestionBox = ({
-  e,
-  index,
-  key: key,
-  showDetails,
-}: {
-  e: StoredQuestion;
-  index: number;
-  key: string;
-  showDetails: (id: number) => void;
-}) => {
-  return (
-    <button
-      key={key}
-      className="h-[180px] flex bg-gray-500 p-3 rounded-sm shadow-md text-white flex-col"
-      onClick={() => showDetails(e.id)}
-    >
-      <div className="flex flex-row w-full justify-between mb-4">
-        <p className="font-semibold text-lg">{index + 1 + " 번 문제"}</p>
-        <p
-          style={{
-            color: e.isCorrected
-              ? "Dodgerblue"
-              : e.selectedAnswer === 6 ||
-                e.selectedAnswer === undefined ||
-                e.selectedAnswer === null
-              ? "yellow"
-              : "red",
-          }}
-          className="px-1 bg-gray-900 rounded-sm ml-12"
-        >
-          {e.isCorrected
-            ? "정답"
-            : e.selectedAnswer === 6 ||
-              e.selectedAnswer === undefined ||
-              e.selectedAnswer === null
-            ? "풀지않음"
-            : "오답"}
-        </p>
-      </div>
-      {/* <div className="overflow-hidden text-ellipsis text-sm h-[50%] w-full">
-        {e.article}
-      </div> */}
-      <div>{"유형: " + e.questionType}</div>
-      <div>{"걸린 시간: " + e.spentTimeSec + " 초"}</div>
-      <div>기타 표기 정보 추가해주세요!</div>
-    </button>
-  );
-};

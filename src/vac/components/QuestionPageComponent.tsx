@@ -16,8 +16,8 @@ import {
 } from "@/recoil/recommend-atom";
 import { storedQuestionAtom } from "@/recoil/stored-question-atom";
 import { goToNextQuiz } from "@/utils/goToNextQuiz";
-import { useUpdateStoredQuestions } from "@/service/updateStoredQuestion";
 import { StoredQuestion } from "@/type/StoredQuestion";
+import { useUpdateStoredQuestions } from "@/hook/useUpdateStoredQuestion";
 
 export default function QuestionPageComponent() {
   const updateStoredQuestions = useUpdateStoredQuestions();
@@ -32,7 +32,7 @@ export default function QuestionPageComponent() {
   const [selectedContent, setSelectedContent] = useState<string>("");
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [question, setQuestion] = useState<StoredQuestion | null>(null);
-  const [stayTime, setStayTime] = useState(0);
+  const [stayTime, setStayTime] = useState(3);
 
   const setQuestionAnswer = (index: number) => {
     const newQuestion: StoredQuestion = {
@@ -52,21 +52,20 @@ export default function QuestionPageComponent() {
       updateStoredQuestions({
         ...question,
         selectedAnswer: selectedAnswer,
-        spentTimeSec: stayTime,
-        isCorrected: true,
-      });
-      console.log("update");
-      console.log({
-        ...question,
-        selectedAnswer: selectedAnswer,
-        spentTimeSec: stayTime,
+        spentTimeSec:
+          question.spentTimeSec !== undefined
+            ? question.spentTimeSec + stayTime
+            : stayTime,
         isCorrected: true,
       });
     } else if (question !== null) {
       updateStoredQuestions({
         ...question,
         selectedAnswer: selectedAnswer,
-        spentTimeSec: stayTime,
+        spentTimeSec:
+          question.spentTimeSec !== undefined
+            ? question.spentTimeSec + stayTime
+            : stayTime,
         isCorrected: false,
       });
     }
