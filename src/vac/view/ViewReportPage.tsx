@@ -8,6 +8,7 @@ import ResultsChart from "./(report)/ResultsChart";
 import ReportRadarChart from "./(report)/ReportRadarChart";
 import { Grid } from "react-loader-spinner";
 import ReportBarChart from "./(report)/ReportBarChart";
+import ReportResultBox from "./(report)/ReportResultBox";
 
 type IProps = {
   // questions: StoredQuestion[];
@@ -53,13 +54,30 @@ export default function ViewReportPage({
           <h2 className="text-2xl font-semibold">
             {"🤖 문제 해결능력 AI 분석 결과"}
           </h2>{" "}
-          <span className="inline-grid grid-cols-1 lg:grid-cols-2 gap-4 text-lg">
+          <div className="text-lg px-4">
             {
               "이번 풀이 결과를 내 기존 데이터, 학생 평균 데이터와 대조하여 분석합니다."
             }
-          </span>
+          </div>
         </div>
-        <div className="x-[2%] pt-[50px] h-[30%] bg-white gap-4 flex flex-col lg:flex-row p-2  justify-center items-center lg:max-w-[60%] mx-auto">
+        <div className="px-[2%] pt-[50px] bg-white gap-4 flex flex-col justify-start lg:max-w-[60%] mx-auto ">
+          {result ? (
+            <ReportResultBox result={result} />
+          ) : (
+            <div className="w-[100%] flex items-center justify-center">
+              <Grid
+                visible={true}
+                height={80}
+                width={80}
+                color="#7BAFD4"
+                ariaLabel="grid-loading"
+                radius="12.5"
+                wrapperClass="grid-wrapper"
+              />
+            </div>
+          )}
+        </div>
+        <div className="x-[2%] pt-[50px] h-[30%] bg-white gap-4 flex flex-col lg:flex-row p-2  justify-center items-start lg:max-w-[60%] mx-auto">
           {result ? (
             <ReportRadarChart result={result} />
           ) : (
@@ -91,6 +109,7 @@ export default function ViewReportPage({
             </div>
           )}
         </div>
+
         <div className="px-[2%] pt-[50px] bg-white gap-4 flex flex-col justify-start lg:max-w-[60%] mx-auto mb-8 pb-[300px]">
           <div>{/* 여기에 아래로 확장해야 하는 내용을 넣어주세요 */}</div>
         </div>

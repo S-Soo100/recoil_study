@@ -6,5 +6,5 @@ export const demoStatistics: StudentResult = {
   logic: 41,
   criticalThinking: 43,
   vocabulary: 51,
-  timeManagement: 47,
+  timeManagement: 41,
 };

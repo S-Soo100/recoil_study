@@ -5,6 +5,6 @@ export const averageStatistics: StudentResult = {
   comprehension: 41,
   logic: 47,
   criticalThinking: 43,
-  vocabulary: 71,
-  timeManagement: 66,
+  vocabulary: 51,
+  timeManagement: 36,
 };

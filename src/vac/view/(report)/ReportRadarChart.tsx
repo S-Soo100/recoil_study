@@ -99,6 +99,7 @@ const ReportRadarChart = ({ result }: ReportRadarChartProps) => {
   `;
   return (
     <Container>
+      <h1 className="text-2xl font-bold p-3 mx-4">이전 데이터 분석 결과</h1>
       <Radar data={data} />
     </Container>
   );

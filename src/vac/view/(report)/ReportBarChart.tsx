@@ -92,7 +92,8 @@ const ReportBarChart: React.FC<ReportBarChartProps> = ({ result }) => {
   };
 
   return (
-    <div className="w-[100%] lg:w-[50%] ">
+    <div className="w-[100%] lg:w-[50%] h-full justify-start items-start">
+      <h1 className="text-2xl font-bold p-3 mx-4">평균 데이터 분석 결과</h1>
       <Bar options={options} data={data} />
     </div>
   );
