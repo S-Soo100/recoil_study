@@ -14,6 +14,7 @@ type IProps = {
   result: StudentResult | null;
   loading: boolean;
   goBack: () => void;
+  goToRecommendPage: () => void;
 };
 
 const AppBar = styled.div`
@@ -37,6 +38,7 @@ export default function ViewReportPage({
   result,
   loading,
   goBack,
+  goToRecommendPage,
 }: IProps) {
   return (
     <>
@@ -112,7 +114,7 @@ export default function ViewReportPage({
         <div className="px-[2%] pt-[50px] bg-white gap-4 flex flex-col items-end lg:max-w-[60%] mx-auto mb-8 pb-[300px]">
           <button
             className="w-[50%] lg:w-[33%] mt-[100px] lg:mt-2 bg-gray-100 p-3 rounded-sm shadow-md flex flex-row justify-between text:lg lg:text-xl items-center text-center hover:bg-gray-900 hover:text-white"
-            onClick={() => {}}
+            onClick={goToRecommendPage}
           >
             <div className="items-center flex flex-row gap-4">
               <p className="text-4xl">📝 </p>

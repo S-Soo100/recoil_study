@@ -1,6 +1,7 @@
 import { Question } from "@/type/Question";
 import axios, { AxiosRequestConfig } from "axios";
 import { setBaseUrls } from "./html";
+import { StoredQuestion } from "@/type/StoredQuestion";
 
 const BASE_URL = process.env.NEXT_PUBLIC_AITUTOR_BACKEND_PRODUCT_SERVER;
 
@@ -16,7 +17,7 @@ export const getRecommendQuestion = async ({
   solvedQuestions,
   length,
   testType,
-}: IProps): Promise<Question[] | null> => {
+}: IProps): Promise<StoredQuestion[] | null> => {
   setBaseUrls();
   // console.log(`getQuestion ${questionType}`);
   console.log(
@@ -43,5 +44,10 @@ export const getRecommendQuestion = async ({
     return null;
   }
 
-  return res as Question[];
+  return {
+    ...res,
+    selectedAnswer: 6,
+    spentTimeSec: 0,
+    isCorrected: false,
+  } as StoredQuestion[];
 };

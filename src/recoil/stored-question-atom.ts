@@ -1,3 +1,4 @@
+import { IncorrectNote } from "@/type/IncorrectNote";
 import { StoredQuestion } from "@/type/StoredQuestion";
 import { atom, selector } from "recoil";
 export const storedQuestionAtom = atom<StoredQuestion[]>({
@@ -20,6 +21,7 @@ export const storedQuestionSelector = selector({
       (acc, curr, idx) => acc + curr.spentTimeSec,
       0
     );
+    const incorrectNotes = records.filter((e) => e.isCorrected === false);
 
     return {
       correctCount,
@@ -28,6 +30,7 @@ export const storedQuestionSelector = selector({
       accuracy,
       incorrectQuestions,
       totalTimeSec,
+      incorrectNotes,
     };
   },
 });

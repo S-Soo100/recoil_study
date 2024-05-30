@@ -2,11 +2,17 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import ViewResultPage from "../view/ViewResultPage";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   storedQuestionAtom,
   storedQuestionSelector,
 } from "@/recoil/stored-question-atom";
+import { initRecommendQuestion } from "@/service/initRecommendQuestion";
+import { useUpdateRecommendQuestionsArray } from "@/hook/useUpdateRecommendQuestion";
+import { StoredQuestion } from "@/type/StoredQuestion";
+import { recommendQuestionAtom } from "@/recoil/recommend-question-atom";
+import { demo1 } from "@/demo/demo";
+import { demoResult } from "@/demo/demoResult";
 
 const ResultPageComponent = () => {
   const [loading, setLoading] = useState(false);
@@ -14,6 +20,8 @@ const ResultPageComponent = () => {
   // 내가 푼 문제 목록 및 정답률
   const router = useRouter();
   const [stored, setStored] = useRecoilState(storedQuestionAtom);
+  const [recommend, setRecommend] = useRecoilState(recommendQuestionAtom);
+  const updateRecommendQuestionsArray = useUpdateRecommendQuestionsArray();
 
   const props = {
     goToHomePage: () => goToHome(),
@@ -39,19 +47,33 @@ const ResultPageComponent = () => {
     }, 1000);
   };
 
-  const goToRecommendQuiz = () => {
+  function atomSetter(val: StoredQuestion[]) {
+    setRecommend(val);
+  }
+
+  const goToRecommendQuiz = async () => {
     setLoading(true);
-    //todo stored를 넣어서, 틀린놈만 골라서 통신하는 API 짜기
-    //! 추천 문제 서버통힌하는 로직 여기에 써야됨
     const timer = setTimeout(() => {
       setLoading(false);
-      // router.push("/어디어디로???");
-    }, 1000);
+      if (recommend.length !== 0) {
+        router.push(`/recommend`);
+      }
+    }, 500);
   };
 
   const showDetails = (id: number) => {
     router.push(`/review/${id}`);
   };
+
+  useEffect(() => {
+    // setRecommend(demoResult);
+    if (recommend.length < 1 && statistics.incorrectNotes.length > 0) {
+      initRecommendQuestion({
+        incorrectNotes: statistics.incorrectNotes,
+        setStoredAtom: atomSetter,
+      });
+    }
+  }, [recommend]);
 
   return (
     <ViewResultPage

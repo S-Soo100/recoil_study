@@ -46,7 +46,7 @@ const ReportResultBox = ({ result }: ReportRadarChartProps) => {
       <h2 className="my-4 text-2xl font-semibold">
         {`📊 ${parseStatusString(first)}, ${parseStatusString(
           second
-        )} 에서 강점, ${parseStatusString(low)} 보충 필요`}
+        )} 에서 강점, ${parseStatusString(low)} 보완 필요`}
       </h2>
       <p className="px-4">{`추천 모의고사를 풀면 부족한 "${parseStatusString(
         low

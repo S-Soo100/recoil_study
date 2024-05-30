@@ -5,7 +5,7 @@ export const demoResult: StoredQuestion[] = [
     id: 30,
     testNumber: "2_2309",
     questionNumber: 18,
-    question: "다음 글의 목적으로 가장 적절한 것은?",
+    question: "12다음 글의 목적으로 가장 적절한 것은?",
     article:
       "To whom it may concern,\nI would like to draw your attention to a problem that \nfrequently occurs with the No. 35 buses. There is a bus \nstop about halfway along Fenny Road, at which the No. \n35 buses are supposed to stop. It would appear, however, \nthat some of your drivers are either unaware of this bus \nstop or for some reason choose to ignore it, driving past \neven though the buses are not full. I would be grateful if \nyou could remind your drivers that this bus stop exists \nand that they should be prepared to stop at it. I look \nforward to seeing an improvement in this service soon. \nYours faithfully,\nJohn Williams",
     options:
@@ -29,7 +29,7 @@ export const demoResult: StoredQuestion[] = [
     id: 40,
     testNumber: "2_2211",
     questionNumber: 19,
-    question: "다음 글에 드러난 ‘I’의 심경 변화로 가장 적절한 것은?",
+    question: "2다음 글에 드러난 ‘I’의 심경 변화로 가장 적절한 것은?",
     article:
       "Dan and I were supposed to make a presentation that day. Right after the class started, my phone buzzed. It was a text from Dan saying, “I can’t make it on time. There’s been a car accident on the road!” I almost fainted. ‘What should I do?’ Dan didn’t show up before our turn, and soon I was standing in front of the whole class. I managed to finish my portion, and my mind went blank for a few seconds, wondering what to do. ‘Hold yourself together!’ I quickly came to my senses and worked through Dan’s part of the presentation as best as I could. After a few moments, I finished the entire presentation on my own. Only then did the tension vanish. I could see our professor’s beaming face.",
     options:
@@ -54,7 +54,7 @@ export const demoResult: StoredQuestion[] = [
     testNumber: "2_2303",
     questionNumber: 29,
     question:
-      "다음 글의 괄호 < > 안의 단어 중, 어법상 가장 틀릴 확률이 높은 것은?",
+      "3다음 글의 괄호 < > 안의 단어 중, 어법상 가장 틀릴 확률이 높은 것은?",
     article:
       "Human beings like certainty. This liking stems from our ancient ancestors ①<who> needed to survive alongside saber?toothed tigers and poisonous berries. Our brains evolved to help us attend to threats, keep away from ②<them>, and remain alive afterward. In fact, we learned that the more ③<certain> we were about something, the better chance we had of making the right choice. Is this berry the same shape as last time? The same size? If I know for certain it ④<is>, my brain will direct me to eat it because I know it’s safe. And if I’m uncertain, my brain will send out a danger alert to protect me. The dependence on certainty all those millennia ago ensured our survival to the present day, and the danger?alert system continues to protect us. This is achieved by our brains labeling new, vague, or unpredictable everyday events and experiences as uncertain. Our brains then ⑤<generating> sensations, thoughts, and action plans to keep us safe from the uncertain element, and we live to see another day. * saber?toothed tiger: 검치호(검 모양의 송곳니를 가진 호랑이)",
     options: "1\n 2\n 3\n 4\n 5",
@@ -77,7 +77,7 @@ export const demoResult: StoredQuestion[] = [
     testNumber: "2_2306",
     questionNumber: 36,
     question:
-      "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것을 \n고르시오.",
+      "4주어진 글 다음에 이어질 글의 순서로 가장 적절한 것을 \n고르시오.",
     article:
       "When evaluating a policy, people tend to concentrate \non how the policy will fix some particular problem while \nignoring or downplaying other effects it may have. \nEconomists often refer to this situation as The Law of \nUnintended Consequences. \n(A) But an unintended consequence is that the jobs of some \nautoworkers will be lost to foreign competition. Why? \nThe tariff that protects steelworkers raises the price of \nthe steel that domestic automobile makers need to build \ntheir cars. \n(B) For instance, suppose that you impose a tariff on \nimported steel in order to protect the jobs of domestic \nsteelworkers. If you impose a high enough tariff, their \njobs will indeed be protected from competition by \nforeign steel companies.\n (C) As a result, domestic automobile manufacturers have to \nraise the prices of their cars, making them relatively \nless attractive than foreign cars. Raising prices tends to \nreduce domestic car sales, so some domestic \nautoworkers lose their jobs. ",
     options:
@@ -150,7 +150,7 @@ export const demoResult: StoredQuestion[] = [
     id: 82,
     testNumber: "2_2211",
     questionNumber: 26,
-    question: " Janaki Ammal에 관한 다음 글의 내용과 일치하지 않는 것은?",
+    question: "5 Janaki Ammal에 관한 다음 글의 내용과 일치하지 않는 것은?",
     article:
       "Janaki Ammal, one of India’s most notable scientists, was born in 1897, and was expected to wed through an arranged marriage. Despite living at a time when literacy among women in India was less than one percent, she decided to reject tradition and attend college. In 1924, she went to the U.S. and eventually received a doctorate in botany from the University of Michigan. Ammal contributed to the development of the sweetest sugarcane variety in the world. She moved to England where she co-authored the Chromosome Atlas of Cultivated Plants. Following a series of famines, she returned to India to help increase food production at the request of the Prime Minister. However, Ammal disagreed with the deforestation taking place in an effort to grow more food. She became an advocate for the preservation of native plants and successfully saved the Silent Valley from the construction of a hydroelectric dam.",
     options:

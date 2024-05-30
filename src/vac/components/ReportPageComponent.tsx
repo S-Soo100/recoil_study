@@ -37,6 +37,13 @@ export default function ReportPageComponent() {
     goBack: () => {
       router.back();
     },
+    goToRecommendPage: () => {
+      setLoading(true);
+      const timer = setTimeout(() => {
+        setLoading(false);
+        router.push("/recommend");
+      }, 500);
+    },
   };
 
   return (

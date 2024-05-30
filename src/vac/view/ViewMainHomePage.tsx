@@ -1,14 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import profilePic from "../../../../public/ai-tutor-character.png";
-import Modal from "./(modal)/Modal";
+import profilePic from "../../../public/ai-tutor-character.png";
+import Modal from "./(main)/(modal)/Modal";
 import Icon from "@/icons/Icon";
 import { useRouter } from "next/navigation";
 import { questionAtom } from "@/recoil/question-atom";
 import { initMainQuestion } from "@/service/initMainQuestion";
 import { useRecoilState } from "recoil";
-import Loader from "../Loader";
+import Loader from "./Loader";
 import { Question } from "@/type/Question";
 import { useUpdateStoredQuestionsArray } from "@/hook/useUpdateStoredQuestion";
 import { StoredQuestion } from "@/type/StoredQuestion";
@@ -18,7 +18,6 @@ export default function ViewMainHomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [atom, setAtom] = useRecoilState(questionAtom);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -32,17 +31,7 @@ export default function ViewMainHomePage() {
     initMainQuestion({ setStoredAtom: atomSetter });
     const timer = setTimeout(() => {
       setLoading(false);
-      if (atom.length > 0) {
-        closeModal();
-        router.push("/quiz/1");
-      } else {
-        setLoading(true);
-        const timer = setTimeout(() => {
-          setLoading(false);
-          closeModal();
-          router.push("/quiz/1");
-        }, 500);
-      }
+      router.push("/quiz/1");
     }, 1500);
   };
 
