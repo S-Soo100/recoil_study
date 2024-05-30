@@ -1,5 +1,6 @@
 import { averageStatistics } from "@/demo/averageStatistics";
 import { StudentResult } from "@/type/StudentResult";
+import { parseStatusString } from "@/utils/parseStatusString";
 import React, { useEffect, useState } from "react";
 interface ReportRadarChartProps {
   result: StudentResult;
@@ -43,13 +44,21 @@ const ReportResultBox = ({ result }: ReportRadarChartProps) => {
   return (
     <section className="gap-1 mb-3">
       <h2 className="my-4 text-2xl font-semibold">
-        {`📊 ${first}, ${second}에서 강점, ${low} 부분 보충 필요`}
+        {`📊 ${parseStatusString(first)}, ${parseStatusString(
+          second
+        )} 에서 강점, ${parseStatusString(low)} 보충 필요`}
       </h2>
-      <p className="px-4">{`추천 모의고사를 풀면 부족한 ${low} 유형을 집중 학습할 수 있어요!`}</p>
+      <p className="px-4">{`추천 모의고사를 풀면 부족한 "${parseStatusString(
+        low
+      )}" 능력을 집중 학습할 수 있어요!`}</p>
       <p className="px-4">
         {isHigherThanAvg
-          ? `가장 두각을 나타내고 있는 ${first}능력은 학생 평균보다도 높은 수치에요!`
-          : `${first}능력은 가장 두각을 나타내고 있지만 아직 학생 평균 데이터보다 조금 부족해요!`}
+          ? `가장 두각을 나타내고 있는 "${parseStatusString(
+              first
+            )}" 능력은 학생 평균보다도 높은 수치에요!`
+          : `"${parseStatusString(
+              first
+            )}" 능력은 가장 두각을 나타내고 있지만 아직 학생 평균 데이터보다 조금 부족해요!`}
       </p>
     </section>
   );

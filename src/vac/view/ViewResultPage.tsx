@@ -4,6 +4,7 @@ import HomeButton from "./(result)/HomeButton";
 import Loader from "./Loader";
 import { StoredQuestion } from "@/type/StoredQuestion";
 import { QuestionBox } from "./(result)/QuestionBox";
+import { timeFormatter } from "@/utils/timeFormatter";
 
 interface Props {
   totalCount: number;
@@ -44,14 +45,17 @@ const ViewResultPage = ({
           <span className="inline-grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="h-[120px] text-lg justify-center items-center flex bg-gray-100 hover:bg-slate-200 p-3 rounded-sm shadow-md  flex-col">
               <div>총 학습시간</div>
-              <p className="font-bold text-2xl">{stayTime} 초</p>
+              <p className="font-bold text-2xl">{timeFormatter(stayTime)}</p>
               {/* <div>{stayTime}</div> */}
             </div>
             <div className="h-[120px] text-lg justify-center items-center flex bg-gray-100 hover:bg-slate-200 p-3 rounded-sm shadow-md  flex-col">
-              <p className="font-bold text-2xl">
-                {answerCount + "/" + totalCount + "문제 정답"}
-              </p>
-              <p className=" ">{"정답률 " + correctRate() + "%"}</p>
+              <p className=" ">{"정답률"}</p>
+              <div className="flex flex-row items-center">
+                <p className="font-bold text-2xl ml-3">{correctRate() + "%"}</p>
+                <p className="font-light ml-2">
+                  {"(" + answerCount + "/" + totalCount + "문제 정답)"}
+                </p>
+              </div>
             </div>
           </span>
         </div>
@@ -74,13 +78,13 @@ const ViewResultPage = ({
           <h2 className="text-2xl font-semibold">AI 분석결과 보기</h2>
           <div className="grid gap-4 grid-cols-1 lg:grid-cols-3">
             <button
-              className="h-[120px] bg-gray-100 p-3 rounded-sm shadow-md flex flex-col justify-center text:lg lg:text-xl items-center text-center hover:bg-slate-200"
+              className="h-[120px] bg-gray-100 p-3 rounded-sm shadow-md flex flex-col justify-center text:lg lg:text-xl items-center text-center hover:bg-gray-900 hover:text-white"
               onClick={goToReport}
             >
               <p>📊 분석결과 보고서</p>
             </button>
             <button
-              className="h-[120px] bg-gray-100 p-3 rounded-sm shadow-md flex flex-col justify-center text:lg lg:text-xl items-center text-center hover:bg-slate-200"
+              className="h-[120px] bg-gray-100 p-3 rounded-sm shadow-md flex flex-col justify-center text:lg lg:text-xl items-center text-center hover:bg-gray-900 hover:text-white"
               onClick={goToRecommendQuiz}
             >
               <p> 📝 추천 문제 모의고사</p>
