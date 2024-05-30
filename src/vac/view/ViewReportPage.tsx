@@ -111,13 +111,13 @@ export default function ViewReportPage({
 
         <div className="px-[2%] pt-[50px] bg-white gap-4 flex flex-col items-end lg:max-w-[60%] mx-auto mb-8 pb-[300px]">
           <button
-            className="w-[50%] lg:w-[40%] bg-gray-100 p-3 rounded-sm shadow-md flex flex-row justify-between text:lg lg:text-xl items-center text-center hover:bg-gray-900 hover:text-white"
+            className="w-[50%] lg:w-[33%] mt-[100px] lg:mt-2 bg-gray-100 p-3 rounded-sm shadow-md flex flex-row justify-between text:lg lg:text-xl items-center text-center hover:bg-gray-900 hover:text-white"
             onClick={() => {}}
           >
             <div className="items-center flex flex-row gap-4">
               <p className="text-4xl">📝 </p>
               <div className="text-start flex flex-col">
-                <p> 추천 문제 모의고사</p>
+                <p> 추천 문제</p>
                 <p> 풀러 가기</p>
               </div>
             </div>

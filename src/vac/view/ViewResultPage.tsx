@@ -61,7 +61,12 @@ const ViewResultPage = ({
         </div>
 
         <div className="px-[2%] pt-[50px] bg-white gap-4 flex flex-col justify-start lg:max-w-[60%] mx-auto pb-4 ">
-          <h2 className="text-2xl font-semibold">문제풀이 점검</h2>
+          <span className="flex-row flex items-end gap-3">
+            <h2 className="text-2xl font-semibold">문제풀이 점검</h2>
+            <p className="text-gray-700 font-extralight">
+              {"(각 문제를 클릭하면 해설을 볼 수 있어요!)"}
+            </p>
+          </span>
           <span className="inline-grid grid-cols-1 lg:grid-cols-2 gap-4">
             {storedQuestions.map((e, index) => (
               <QuestionBox
