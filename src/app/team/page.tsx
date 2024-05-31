@@ -1,4 +1,6 @@
-import React from 'react'
+import Image from "next/image";
+import React from "react";
+import team1 from "../../../public/team-1.png";
 
 export default function TeamPage() {
   return (
@@ -9,7 +11,7 @@ export default function TeamPage() {
       >
         구성원
       </section>
-      <div className='mx-12'>내용 여기 기재</div>
+      <Image src={team1} alt="TeamImage" />
     </main>
-  )
+  );
 }

@@ -51,7 +51,6 @@ export default function ViewMainHomePage() {
       >
         <div className="flex flex-row justify-center items-center">
           <Icon width={160} />
-          {/* <div>A Important</div> */}
         </div>
         <div className="gap-3 flex-row flex">
           <a href="/about">더 알아보기</a>
