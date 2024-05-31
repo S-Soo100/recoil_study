@@ -241,28 +241,4 @@ export const demoResult: StoredQuestion[] = [
     spentTimeSec: 6,
     isCorrected: false,
   },
-  {
-    id: 40,
-    testNumber: "2_2211",
-    questionNumber: 19,
-    question: "다음 글에 드러난 ‘I’의 심경 변화로 가장 적절한 것은?",
-    article:
-      "Dan and I were supposed to make a presentation that day. Right after the class started, my phone buzzed. It was a text from Dan saying, “I can’t make it on time. There’s been a car accident on the road!” I almost fainted. ‘What should I do?’ Dan didn’t show up before our turn, and soon I was standing in front of the whole class. I managed to finish my portion, and my mind went blank for a few seconds, wondering what to do. ‘Hold yourself together!’ I quickly came to my senses and worked through Dan’s part of the presentation as best as I could. After a few moments, I finished the entire presentation on my own. Only then did the tension vanish. I could see our professor’s beaming face.",
-    options:
-      "① panicked → relieved\n ② sorrowful → indifferent\n③ sympathetic → content\n ④ jealous → delighted\n⑤ confused → humiliated",
-    answer: 1,
-    questionType: "2",
-    solution:
-      "이 문제는 글에 나타난 'I'의 감정 변화를 묻고 있습니다. 글의 내용을 기반으로 보면, 'I'는 처음에 Dan이 사고로 인해 시간에 맞춰 오지 못한다는 소식을 듣고 거의 기절할 정도로 당황합니다. 하지만 자신의 부분을 마친 후, 잠시 멍해졌다가 곧 이성을 되찾고 Dan의 부분까지 최선을 다해 발표합니다. 발표를 마친 후, 긴장이 풀리며 교수님의 웃는 얼굴을 볼 수 있었다고 합니다.\n\n이를 토대로 'I'의 감정 변화를 살펴보면 처음에는 당황하거나 공포를 느끼다가(panicked), 마지막에는 안도감을 느끼고 기쁘게 느낀(relieved) 것으로 판단할 수 있습니다.\n\n따라서 가장 적절한 감정 변화는 '① panicked → relieved' 입니다.",
-    keyWords:
-      "'fainted': '기절할 뻔하다'| 'tension': '긴장'| 'beaming': '환하게 빛나는'",
-    difficulty: null,
-    incorrectRate: null,
-    createdAt: "2024-05-21T00:11:17.083Z",
-    updatedAt: "2024-05-21T00:11:17.083Z",
-    deletedAt: null,
-    selectedAnswer: 3,
-    spentTimeSec: 3,
-    isCorrected: false,
-  },
 ];

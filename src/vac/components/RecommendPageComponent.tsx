@@ -95,6 +95,8 @@ export default function RecommendPageComponent() {
           setNextQuestion();
         }}
         goToPrev={setPrev}
+        currentIndex={currentIndex}
+        maxIndex={maxIndex}
       />
     </>
   );

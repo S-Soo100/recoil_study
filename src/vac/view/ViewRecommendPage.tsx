@@ -52,6 +52,8 @@ type Props = {
   handleYes: () => void;
   goToNextQuiz: () => void;
   goToPrev: () => void;
+  currentIndex: number;
+  maxIndex: number;
 };
 
 export default function ViewRecommendPage({
@@ -66,6 +68,8 @@ export default function ViewRecommendPage({
   handleYes,
   goToNextQuiz,
   goToPrev,
+  currentIndex,
+  maxIndex,
 }: Props) {
   const params: { type: string } | null = useParams();
 
@@ -97,18 +101,19 @@ export default function ViewRecommendPage({
         </FloatAnswer> */}
         <QuestionContainer>
           <MainContent>
-            <div className="flex flex-row justify-between">
+            <div className="my-4 flex flex-row justify-between items-center">
               <button
                 onClick={goToPrev}
-                className="my-4 p-2 bg-gray-800 text-white flex max-w-[100px] justify-center text-center rounded-xl"
+                className=" p-2 bg-gray-800 text-white flex max-w-[100px] justify-center text-center rounded-xl"
               >
                 {"뒤로가기"}
               </button>
-              <div>
+              <div className="">{currentIndex + 1 + "/" + (maxIndex + 1)}</div>
+              <div className="w-[180px]">
                 {isSelected && (
                   <div className="flex flex-row justify-end ">
                     <button
-                      className="my-4 mx-2 p-2 bg-blue-600 text-white text-lg rounded-md"
+                      className=" mx-2 p-2 bg-blue-600 text-white text-lg rounded-md"
                       onClick={goToNextQuiz}
                     >
                       {"다음 문제 ➡️"}

@@ -72,6 +72,9 @@ const ResultPageComponent = () => {
         incorrectNotes: statistics.incorrectNotes,
         setStoredAtom: atomSetter,
       });
+    } else {
+      console.log("demo setted");
+      setRecommend(demoResult);
     }
   }, [recommend]);
 
