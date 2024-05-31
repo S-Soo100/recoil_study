@@ -53,7 +53,7 @@ export default function ViewMainHomePage() {
           <Icon width={160} />
         </div>
         <div className="gap-3 flex-row flex">
-          <a href="/about">더 알아보기</a>
+          <a href="/upload">pdf 업로드</a>
           <a href="/team">팀 구성</a>
         </div>
       </section>

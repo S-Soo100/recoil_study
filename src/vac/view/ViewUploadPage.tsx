@@ -2,6 +2,7 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/navigation";
 import React from "react";
+import Loader from "./Loader";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -99,21 +100,24 @@ const ViewUploadPage = ({
   };
 
   return (
-    <Container>
-      <BackButton onClick={handleBack}>뒤로가기</BackButton>
-      <UploadBox>
-        <Title>File Upload</Title>
-        <Description>
-          Select a file to upload and click the button below to start the upload
-          process.
-        </Description>
+    <>
+      <Container>
+        <BackButton onClick={handleBack}>뒤로가기</BackButton>
+        <UploadBox>
+          <Title>모의고사 PDF File Upload</Title>
+          <Description>
+            영어 모의고사 pdf파일을 업로드해주세요. 업로드 하신 문제는 ai가
+            분석하고 풀이한 후 DB에 문제를 차례차례 추가해줍니다.
+          </Description>
 
-        <Input type="file" onChange={onFileChange} />
-        <Button onClick={onUpload} disabled={uploading || !selectedFile}>
-          {uploading ? "Uploading..." : "Upload File"}
-        </Button>
-      </UploadBox>
-    </Container>
+          <Input type="file" onChange={onFileChange} />
+          <Button onClick={onUpload} disabled={uploading || !selectedFile}>
+            {uploading ? "Uploading..." : "Upload File"}
+          </Button>
+        </UploadBox>
+      </Container>
+      <Loader loading={uploading} size="60" />
+    </>
   );
 };
 
