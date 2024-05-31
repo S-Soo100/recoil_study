@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import TypingEffectDisplay from "./TypingEffectDisplay";
 
 const FeedbackContainer = styled.div`
   border-radius: 30px;
@@ -50,12 +51,14 @@ const FeedbackDisplay: React.FC<FeedbackDisplayProps> = ({
       }}
     >
       {isCorrect ? "정답입니다!" : `오답, 답은 ${answer}번 입니다.`}
-      <SolutionBox>{explanation}</SolutionBox>
+      <SolutionBox>
+        <TypingEffectDisplay text={explanation} speed={50} start={true} />
+      </SolutionBox>
       <KeywordBox>
         <p className="m-1 text-blue-600 font-bold">{"<Key words>"}</p>
         {keywords.map((keyword, index) => (
           <div className="m-1" key={index}>
-            {keyword}
+            <TypingEffectDisplay text={keyword} speed={50} start={true} />
           </div>
         ))}
       </KeywordBox>
