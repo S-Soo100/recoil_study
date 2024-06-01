@@ -12,6 +12,9 @@ type IProps = {
   setSelectedItem: (item: Question) => void;
   selectedItem: Question | null;
   goToHome: () => void;
+  goToUploadPage: () => void;
+  isAi: boolean;
+  setIsAi: (value: boolean) => void;
 };
 
 export default function ViewTeacherPage({
@@ -20,43 +23,96 @@ export default function ViewTeacherPage({
   setSelectedItem,
   selectedItem,
   goToHome,
+  goToUploadPage,
+  isAi,
+  setIsAi,
 }: IProps) {
   return (
     <>
+      <div className="p-2 bg-slate-800 flex flex-row justify-between">
+        <div className="p-2">
+          <HomeButton onClick={goToHome} />
+        </div>
+        <button
+          className="p-2 m-2 rounded-lg bg-white text-black font-semibold px-4"
+          onClick={goToUploadPage}
+        >
+          pdf 업로드
+        </button>
+      </div>
       <div className="flex h-screen bg-gray-300 text-gray-800 font-sans">
         <div
           id="Sidebar"
-          className="max-w-[300px] w-[50%] bg-slate-800 text-white border-r border-gray-200 p-4 overflow-y-auto"
+          className="min-w-[300px] bg-slate-800 text-white border-r border-gray-200 p-4 overflow-y-auto"
         >
-          <div className="p-2">
-            <HomeButton onClick={goToHome} />
-          </div>
           <h1 className="text-2xl mb-4 p-2 text-center font-semibold">
             문제 목록
           </h1>
+          <div className="grid grid-cols-2 gap-2 p-2">
+            <button
+              onClick={() => setIsAi(false)}
+              className={`w-full  p-1 text-center text-ellipsis ${
+                isAi ? "" : "bg-slate-300 text-black"
+              }`}
+            >
+              모의고사&수능
+            </button>
+            <button
+              onClick={() => setIsAi(true)}
+              className={`w-full p-1 ext-center text-ellipsis ${
+                isAi ? "bg-slate-300 text-black" : " "
+              }`}
+            >
+              AI PDF문제 해설
+            </button>
+          </div>
           {loading ? (
             <div className="text-center p-4">Loading...</div>
+          ) : isAi ? (
+            data!
+              .filter((e) => e.question === "")
+              .map((item, index) => (
+                <div
+                  key={item.id}
+                  onClick={() => setSelectedItem(item)}
+                  className={`p-2 border-b border-gray-200 w-full text-ellipsis cursor-pointer hover:bg-gray-600 ${
+                    selectedItem && selectedItem.id === item.id
+                      ? "bg-slate-300 text-gray-900"
+                      : ""
+                  }`}
+                >
+                  {item.id + " : " + parseTestNumber(item.testNumber)}
+                </div>
+              ))
           ) : (
-            data!.map((item, index) => (
-              <div
-                key={item.id}
-                onClick={() => setSelectedItem(item)}
-                className={`p-2 border-b border-gray-200 w-full text-ellipsis cursor-pointer hover:bg-gray-600 ${
-                  selectedItem && selectedItem.id === item.id
-                    ? "bg-slate-300 text-gray-900"
-                    : ""
-                }`}
-              >
-                {item.id + " : " + parseTestNumber(item.testNumber)}
-              </div>
-            ))
+            data!
+              .filter((e) => e.question !== "")
+              .map((item, index) => (
+                <div
+                  key={item.id}
+                  onClick={() => setSelectedItem(item)}
+                  className={`p-2 border-b border-gray-200 w-full text-ellipsis cursor-pointer hover:bg-gray-600 ${
+                    selectedItem && selectedItem.id === item.id
+                      ? "bg-slate-300 text-gray-900"
+                      : ""
+                  }`}
+                >
+                  {item.id + " : " + parseTestNumber(item.testNumber)}
+                </div>
+              ))
           )}
         </div>
         <div className="flex-grow p-10 bg-gray-100 flex  flex-col gap-4 max-w-[70%]">
           {selectedItem ? (
             <>
               <h2 className="text-2xl p-6 shadow-lg bg-white rounded-xl font-semibold">
-                {"[No." + selectedItem.id + "] " + selectedItem.question}
+                {selectedItem.question !== ""
+                  ? "[No." + selectedItem.id + "] " + selectedItem.question
+                  : "[No." +
+                    selectedItem.id +
+                    "] 파일명 " +
+                    parseTestNumber(selectedItem.testNumber) +
+                    ".pdf"}
               </h2>
               <p className="text-lg p-6 shadow-lg bg-white rounded-xl">
                 <p className="font-bold mb-4">문제 정보</p>
@@ -66,20 +122,31 @@ export default function ViewTeacherPage({
                     {"문제 유형 : " +
                       parseQuestionType(selectedItem.questionType)}
                   </p>
+                  <p>{"문제 번호 : " + selectedItem.questionNumber + "번"}</p>
                 </div>
               </p>
-              <p className="text-lg p-6 shadow-lg bg-white rounded-xl">
-                <p className="font-bold mb-4">지문</p>
-                <p>{selectedItem.article}</p>
-              </p>
-              <p className="text-lg p-6 shadow-lg bg-white rounded-xl">
-                <p className="font-bold mb-4">선택지</p>
-                <div>
-                  {selectedItem.options.split("\n").map((e) => (
-                    <p key={e}>{e}</p>
-                  ))}
-                </div>
-              </p>
+              {selectedItem.article !== "" ? (
+                <p className="text-lg p-6 shadow-lg bg-white rounded-xl">
+                  <p className="font-bold mb-4">지문</p>
+                  <p>{selectedItem.article}</p>
+                </p>
+              ) : (
+                <></>
+              )}
+
+              {selectedItem.article !== "" ? (
+                <p className="text-lg p-6 shadow-lg bg-white rounded-xl">
+                  <p className="font-bold mb-4">선택지</p>
+                  <div>
+                    {selectedItem.options.split("\n").map((e) => (
+                      <p key={e}>{e}</p>
+                    ))}
+                  </div>
+                </p>
+              ) : (
+                <></>
+              )}
+
               <p className="text-lg p-6 shadow-lg bg-white rounded-xl">
                 <p className="font-bold mb-4">답변 및 해석</p>
                 <p className="mb-4">{"정답 : " + selectedItem.answer + "번"}</p>

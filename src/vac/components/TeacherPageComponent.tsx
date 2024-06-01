@@ -13,13 +13,14 @@ export default function TeacherPageComponent() {
   const [selectedItem, setSelectedItem] = useState<Question | null>(null);
   const allQuestion = useRecoilValue(allQuestionAtom);
   const router = useRouter();
+  const [isAi, setIsAi] = useState(false);
 
   useEffect(() => {
     // 데이터 fetch 예시
     setTimeout(() => {
       setData(allQuestion);
       setLoading(false);
-    }, 2000);
+    }, 600);
   }, [allQuestion]);
 
   return (
@@ -32,6 +33,9 @@ export default function TeacherPageComponent() {
         }}
         selectedItem={selectedItem}
         goToHome={() => router.back()}
+        goToUploadPage={() => router.push("/upload")}
+        isAi={isAi}
+        setIsAi={(value) => setIsAi(value)}
       />
     </>
   );

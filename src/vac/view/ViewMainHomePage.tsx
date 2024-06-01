@@ -75,8 +75,13 @@ export default function ViewMainHomePage() {
           <Icon width={160} />
         </div>
         <div className="gap-3 flex-row flex">
-          <a href="/upload">pdf 업로드</a>
-          <a href="/team">팀 구성</a>
+          {/* <a href="/upload">pdf 업로드</a> */}
+          <a
+            href="/team"
+            className="p-1 shadow-sm rounded-full bg-gray-50 px-2 text-gray-700"
+          >
+            팀 구성
+          </a>
         </div>
       </section>
       <section className="bg-white min-h-[80dvh] flex lg:flex-row flex-col lg:gap-x-12 items-start">
