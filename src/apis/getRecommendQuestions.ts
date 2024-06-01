@@ -3,6 +3,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { StoredQuestion } from "@/type/StoredQuestion";
 
 const BASE_URL = process.env.NEXT_PUBLIC_AITUTOR_BACKEND_PRODUCT_SERVER;
+const TOKEN = process.env.NEXT_PUBLIC_AITUTOR_BEARER_TOKEN;
 
 type IProps = {
   questionType: string;
@@ -22,6 +23,7 @@ export const getRecommendQuestion = async ({
     url: `${BASE_URL}question/random?questionType=${questionType}&solvedQuestions=${solvedQuestions}&length=${length}&testType=${testType}`,
     method: "GET",
     headers: {
+      Authorization: `Bearer ${TOKEN}`,
       "Content-Type": "application/json",
     },
   };

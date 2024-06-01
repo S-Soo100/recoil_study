@@ -52,7 +52,7 @@ export default function ViewTeacherPage({
             ))
           )}
         </div>
-        <div className="flex-grow p-10 bg-gray-100 flex  flex-col gap-4">
+        <div className="flex-grow p-10 bg-gray-100 flex  flex-col gap-4 max-w-[70%]">
           {selectedItem ? (
             <>
               <h2 className="text-2xl p-6 shadow-lg bg-white rounded-xl font-semibold">

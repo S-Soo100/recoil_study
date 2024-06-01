@@ -1,44 +1,50 @@
 import { Question } from "@/type/Question";
+import { StoredQuestion } from "@/type/StoredQuestion";
 import axios, { AxiosRequestConfig } from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_AITUTOR_BACKEND_PRODUCT_SERVER;
 const TOKEN = process.env.NEXT_PUBLIC_AITUTOR_BEARER_TOKEN;
 
 type IProps = {
-  questionType: number;
-  solvedQuestions: string;
-  length: number;
-  testType: number;
+  uid: number;
+  questions: StoredQuestion[];
 };
 
-export const getQuestion = async ({
-  questionType,
-  solvedQuestions,
-  length,
-  testType,
-}: IProps): Promise<Question[] | null> => {
+export const updateHistory = async ({
+  uid,
+  questions,
+}: IProps): Promise<boolean> => {
+  const dataBody = questions.map(
+    (question) =>
+      `id=${question.id}&testType=${question.questionType}&selected=${question.selectedAnswer}&isCorrect=${question.isCorrected}`
+  );
+
+  const dataString = `[${dataBody.join("\n")}]`;
+
   const axiosOption: AxiosRequestConfig = {
     baseURL: "",
-    url: `${BASE_URL}question/random?questionType=${questionType}&solvedQuestions=${solvedQuestions}&length=${length}&testType=${testType}`,
-    method: "GET",
+    url: `${BASE_URL}history/${uid}`,
+    method: "POST",
     headers: {
       Authorization: `Bearer ${TOKEN}`,
       "Content-Type": "application/json",
+    },
+    data: {
+      testResult: dataString,
     },
   };
 
   const res = await axios
     .request(axiosOption)
     .then((response) => {
-      // console.log(questionType + "번째 호출");
-      // console.log(response.data.data);
+      console.log("updateHistroy" + response.data.data);
       return response.data.data;
     })
     .catch((error) => console.log(`ERROR IS : ${error.message}`));
 
   if (!res) {
-    return null;
+    return false;
   }
 
-  return res as Question[];
+  return true;
 };

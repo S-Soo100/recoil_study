@@ -2,6 +2,7 @@ import { Question } from "@/type/Question";
 import axios, { AxiosRequestConfig } from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_AITUTOR_BACKEND_PRODUCT_SERVER;
+const TOKEN = process.env.NEXT_PUBLIC_AITUTOR_BEARER_TOKEN;
 
 export const getAllQuestion = async (): Promise<Question[] | null> => {
   const axiosOption: AxiosRequestConfig = {
@@ -9,6 +10,7 @@ export const getAllQuestion = async (): Promise<Question[] | null> => {
     url: `${BASE_URL}question`,
     method: "GET",
     headers: {
+      Authorization: `Bearer ${TOKEN}`,
       "Content-Type": "application/json",
     },
   };
