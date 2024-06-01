@@ -79,17 +79,9 @@ export default function QuestionPageComponent() {
     if (question === null) {
       setQuestion(storedQuestion[parseInt(params?.type ?? "2") - 1]);
       setSelectedAnswer(
-        storedQuestion[parseInt(params?.type ?? "2") - 1].selectedAnswer
+        storedQuestion[parseInt(params?.type ?? "2") - 1].selectedAnswer ?? 6
       );
     }
-    // if (storedQuestion.length < 1) {
-    //   setQuestion({
-    //     ...demo1,
-    //     selectedAnswer: 6,
-    //     spentTimeSec: 0,
-    //     isCorrected: false,
-    //   });
-    // }
 
     setTimeout(() => {
       setLoading(false);

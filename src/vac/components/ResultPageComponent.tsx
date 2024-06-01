@@ -11,9 +11,16 @@ import { initRecommendQuestion } from "@/service/initRecommendQuestion";
 import { StoredQuestion } from "@/type/StoredQuestion";
 import { recommendQuestionAtom } from "@/recoil/recommend-question-atom";
 import { demoResult } from "@/demo/demoResult";
+import { updateHistory } from "@/apis/updateHistory";
+
+const USER = {
+  uid: 1,
+  name: "AI-MPORTANT",
+};
 
 const ResultPageComponent = () => {
   const [loading, setLoading] = useState(false);
+  const [updated, setUpdated] = useState(false);
   const statistics = useRecoilValue(storedQuestionSelector);
   // 내가 푼 문제 목록 및 정답률
   const router = useRouter();
@@ -74,6 +81,17 @@ const ResultPageComponent = () => {
       setRecommend(demoResult);
     }
   }, [recommend]);
+
+  useEffect(() => {
+    if (stored && !updated) {
+      setUpdated(true);
+      console.log("update history");
+      updateHistory({
+        uid: USER.uid,
+        questions: stored,
+      });
+    }
+  }, []);
 
   return (
     <ViewResultPage
