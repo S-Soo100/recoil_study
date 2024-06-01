@@ -78,11 +78,11 @@ export default function RecommendPageComponent() {
         selectedContent={selectedContent}
         isCorrect={isCorrect}
         question={question}
-        choiceAnswer={function (content: string, index: number): void {
+        choiceAnswer={(content: string, index: number) => {
           if (!isSelected) {
             setIsSelected(true);
             setSelectedAnswer(index);
-            if (index === question?.answer) {
+            if (index + 1 === question?.answer) {
               setIsCorrect(true);
             } else {
               setIsCorrect(false);
